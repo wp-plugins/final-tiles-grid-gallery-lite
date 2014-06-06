@@ -93,10 +93,16 @@ The PRO license bundles even 6 different lightboxes. However you can use any oth
 
 == Changelog ==
 
+= 1.1 =
+* Bugfix: the folder name of the plugin was not correct
+
 = 1.0 =
 * First release
 
 == Upgrade Notice ==
 
-= 1.0.0 =
+= 1.1 =
+* This version fixes a critical bug that prevented to activate the plugin.
+
+= 1.0 =
 * This is the launch version. No changes yet.
