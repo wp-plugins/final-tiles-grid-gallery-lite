@@ -3,7 +3,7 @@ Contributors: GreenTreeLabs
 Donate link: http://greentreelabs.net/blog/donate/
 Tags: gallery, grid, grids, grid gallery, best gallery plugin, photo album, best gallery, photo albums, album, widget, fancy gallery, plugin for gallery, photo gallery, html5 player, plugin gallery, wp gallery, wordpress gallery plugin, responsive gallery, gallery plugin, pagination gallery, pagination portfolio, wp gallery plugin, photo slider, image slider, responsive gallery, wordpress portfolio plugin, plugin, post, links, page, admin, posts, images, seo image, twitter, image album, image, google, portfolio, best portfolio plugin, easy gallery plugin, easy portfolio plugin 
 Requires at least: 3.5.0
-Tested up to: 3.9.1
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
