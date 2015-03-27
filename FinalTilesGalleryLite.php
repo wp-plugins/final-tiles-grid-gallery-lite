@@ -3,11 +3,12 @@
 Plugin Name: Final Tiles Grid Gallery Lite
 Description: Wordpress Plugin for creating responsive image galleries. By: Green Tree Labs
 Author: Green Tree Labs
-Version: 1.1
+Version: 1.2
 Author URI: http://greentreelabs.net
 easy media gallery
 Changelog: 
 	
+	1.2 Bugfix: fixed menu
 	1.1 Bugfix: the folder name of the plugin was not correct
 	1.0 First release
 */
@@ -256,10 +257,10 @@ if (!class_exists("FinalTilesGalleryLite"))
 		//Create Admin Menu
 		public function add_gallery_admin_menu() 
 		{
-			$overview = add_menu_page('Final Tiles Gallery', 'Final Tiles Gallery', 1, 'FinalTiles-gallery-admin', array($this, 'add_overview'), WP_PLUGIN_URL.'/final-tiles-grid-gallery-lite/admin/icon.png');
-			$tutorial = add_submenu_page('FinalTiles-gallery-admin', __('FinalTiles Gallery >> Tutorial','FinalTiles-gallery'), __('Tutorial','FinalTiles-gallery'), 1, 'tutorial', array($this, 'tutorial'));
-			$add_gallery = add_submenu_page('FinalTiles-gallery-admin', __('FinalTiles Gallery >> Add Gallery','FinalTiles-gallery'), __('Add Gallery','FinalTiles-gallery'), 1, 'add-gallery', array($this, 'add_gallery'));
-			$edit_gallery = add_submenu_page('FinalTiles-gallery-admin', __('FinalTiles Gallery >> Edit Gallery','FinalTiles-gallery'), __('Edit Gallery','FinalTiles-gallery'), 1, 'edit-gallery', array($this, 'edit_gallery'));
+			$overview = add_menu_page('Final Tiles Gallery', 'Final Tiles Gallery', 'edit_posts', 'FinalTiles-gallery-admin', array($this, 'add_overview'), WP_PLUGIN_URL.'/final-tiles-grid-gallery-lite/admin/icon.png');
+			$tutorial = add_submenu_page('FinalTiles-gallery-admin', __('FinalTiles Gallery >> Tutorial','FinalTiles-gallery'), __('Tutorial','FinalTiles-gallery'), 'edit_posts', 'tutorial', array($this, 'tutorial'));
+			$add_gallery = add_submenu_page('FinalTiles-gallery-admin', __('FinalTiles Gallery >> Add Gallery','FinalTiles-gallery'), __('Add Gallery','FinalTiles-gallery'), 'edit_posts', 'add-gallery', array($this, 'add_gallery'));
+			$edit_gallery = add_submenu_page('FinalTiles-gallery-admin', __('FinalTiles Gallery >> Edit Gallery','FinalTiles-gallery'), __('Edit Gallery','FinalTiles-gallery'), 'edit_posts', 'edit-gallery', array($this, 'edit_gallery'));
 			
 			add_action('admin_print_styles-'.$add_gallery, array($this, 'FinalTilesGalleryLite_admin_style_load'));
 			add_action('admin_print_styles-'.$edit_gallery, array($this, 'FinalTilesGalleryLite_admin_style_load'));
