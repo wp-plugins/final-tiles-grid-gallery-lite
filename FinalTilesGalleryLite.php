@@ -8,6 +8,7 @@ Author URI: http://greentreelabs.net
 easy media gallery
 Changelog: 
 	
+	1.3 WordPress 4.2 compatibility
 	1.2 Bugfix: fixed menu
 	1.1 Bugfix: the folder name of the plugin was not correct
 	1.0 First release
