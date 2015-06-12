@@ -1,14 +1,14 @@
 === Final Tiles Grid Gallery ===
 Contributors: GreenTreeLabs
 Donate link: http://greentreelabs.net/blog/donate/
-Tags: gallery, grid, grids, grid gallery, best gallery plugin, photo album, best gallery, photo albums, album, widget, fancy gallery, plugin for gallery, photo gallery, html5 player, plugin gallery, wp gallery, wordpress gallery plugin, responsive gallery, gallery plugin, pagination gallery, pagination portfolio, wp gallery plugin, photo slider, image slider, responsive gallery, wordpress portfolio plugin, plugin, post, links, page, admin, posts, images, seo image, twitter, image album, image, google, portfolio, best portfolio plugin, easy gallery plugin, easy portfolio plugin 
-Requires at least: 3.5.0
-Tested up to: 4.2
+Tags: wordpress grid gallery, grid gallery, best gallery, best grid gallery, photo album, wedding album, wedding photo album, portfolio plugin, portfolio design gallery, portfolio grid gallery, wordpress portfolio, wordpress portfolio plugin, best wordpress portfolio plugin.
+Requires at least: 3.8.0
+Tested up to: 4.2.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The best gallery based on grids, you can say goodbye to the old-looking galleries based on squares, columns or rows.
+The best wordpress grid gallery , you can say goodbye to the old-looking galleries based on squares, columns or rows.
 
 == Description ==
 
@@ -16,7 +16,7 @@ Build galleries like a puzzle, not only you get awesome layouts, but it's also f
 
 = A Brand New Algorithm =
 
-There are dozens of gallery plugins out there, but the problem is that they always look the same!
+There are dozens of wordpress galleries out there, but the problem is that they always look the same!
 Final Tiles Grid Gallery uses a brand new algorithm to make much more interesting grids, how does it work?
 The main concept is very simple: don't crop the images and keep the original size (when possible). 
 
@@ -26,7 +26,12 @@ the tiles of a puzzle with different sizes, so you can use a bigger size for a c
 The gallery is fully responsive and it adapts to the browser using a nice and smooth animation, even on
 mobile devices because it can use the hardware acceleration taking advantage of CSS3 properties.
 
+This plugin is perfect for you if you need:
 
+* a wedding album
+* a desinger portfolio
+* a photography portfolio
+* a products showcase
 
 
 == Installation ==
@@ -38,19 +43,19 @@ The simplest way to install is to click on 'Plugins' then 'Add' and type 'Final 
 = For manual installation 1: =
 
 1. Login to your website and go to the Plugins section of your admin panel.
-1. Click the Add New button.
-1. Under Install Plugins, click the Upload link.
-1. Select the plugin zip file (final-tiles-grid-gallery-lite.x.x.x.zip) from your computer then click the Install Now button.
-1. You should see a message stating that the plugin was installed successfully.
-1. Click the Activate Plugin link.
+2. Click the Add New button.
+3. Under Install Plugins, click the Upload link.
+4. Select the plugin zip file (final-tiles-grid-gallery-lite.x.x.x.zip) from your computer then click the Install Now button.
+5. You should see a message stating that the plugin was installed successfully.
+6. Click the Activate Plugin link.
 
 = For manual installation 2: =
 
 1. You should have access to the server where WordPress is installed. If you don't, see your system administrator.
-1. Copy the plugin zip file (final-tiles-grid-gallery-lite.x.x.x.zip) up to your server and unzip it somewhere on the file system.
-1. Copy the "final-tiles-grid-gallery-lite" folder into the /wp-content/plugins directory of your WordPress installation.
-1. Login to your website and go to the Plugins section of your admin panel.
-1. Look for "Final Tiles Grid Gallery Lite" and click Activate.
+2. Copy the plugin zip file (final-tiles-grid-gallery-lite.x.x.x.zip) up to your server and unzip it somewhere on the file system.
+3. Copy the "final-tiles-grid-gallery-lite" folder into the /wp-content/plugins directory of your WordPress installation.
+4. Login to your website and go to the Plugins section of your admin panel.
+5. Look for "Final Tiles Grid Gallery Lite" and click Activate.
 
 == Frequently Asked Questions ==
 
@@ -64,13 +69,18 @@ inclusion by the theme or another plugin.
 
 Columns happen when the bottom edges of the images are not aligned. To avoid this tedious layout you can raise the "Grid size" setting. This will crop a few pixels but it raises the chances to avoid columns.
 
+= How to get beautiful grids ? =
+
+Have a look at this [video tutorial](https://www.youtube.com/watch?v=RNT4JGjtyrs)
+
+
 = Why does some image look blurry ? =
 
 Under some circumstances the images have to be enlared a bit to avoid gaps. To avoid a blurry effect you can decrease the "Image size factor" setting. 
 
 = I want to use another lightbox instead of the provided one =
 
-The PRO license bundles even 6 different lightboxes. However you can use any other lightbox you want also with the Lite license. If you have installed a lightbox plugin then you just need to select "Direct link to image" in the "Lightbox" settings.
+The PRO license bundles 6 different lightboxes. However you can use any other lightbox you want also with the Lite license. If you have installed a lightbox plugin then you just need to select "Direct link to image" in the "Lightbox" settings.
 
 = How can I get support? =
 
@@ -80,18 +90,21 @@ The PRO license bundles even 6 different lightboxes. However you can use any oth
 
 * Just recommend our plugin to your friends! or
 * Like and share our [Facebook page](https://www.facebook.com/greentreelabs "Facebook fan page") or
-* Donate to [Final Tiles Grid Gallery Project][ftg donate].
 
-[ftg donate]: http://greentreelabs.net/blog/donate/
-            "Donate to Final Tiles Grid Gallery Project"
 
 == Screenshots ==
 
-1. Final Tiles Grid Gallery Control Panel
-2. Final Tiles Grid Gallery Images Panel
-3. Final Tiles Grid Gallery Example
+1. Gallery Example 1
+2. Gallery Example 2
+3. Gallery Example 3
+4. Admin panel with Google Material design
+5. Image management
+6. 52 pages documentation
 
 == Changelog ==
+
+= 2.0 =
+* Major release: many new features, new admin panel with Google Material design, many bug fixes
 
 = 1.3 =
 * WordPress 4.2 compatibility

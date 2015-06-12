@@ -10,7 +10,24 @@ function set_utf8()
 	$sql2 = "ALTER TABLE  $FinalTilesImages CHANGE  `description`  `description` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL";
 	
 	$wpdb->query($sql1);	
-	$wpdb->query($sql2);	
+	$wpdb->query($sql2);
+}
+
+function ftg_nullable()
+{
+    global $wpdb;
+	
+	$FinalTilesGalleries = $wpdb->FinalTilesGalleries;
+	
+    $fields = array("name", "slug", "description", "filters", "width", "margin", "minTileWidth", "gridCellSize", "imageSizeFactor",
+                    "lightbox", "hoverEffect", "hoverColor", "hoverOpacity", "hoverEffectDuration", "hoverEasing", "scrollEffect",
+                    "shuffle", "enableTwitter", "enableFacebook", "enableGplus", "enablePinterest", "borderSize", "borderColor",
+                    "shadowSize", "shoadowColor", "backgroundColor", "enlargeImages", "borderRadius", "style", "script");
+    
+    foreach($fields as $field)
+    {
+        $wpdb->query("ALTER TABLE  $FinalTilesGalleries MODIFY  $field VARCHAR(1000) NULL");
+    }
 }
 
 function install_db() 
@@ -24,7 +41,7 @@ function install_db()
   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		
   $sql = "CREATE TABLE $FinalTilesGalleries (
-	 	Id INT NOT NULL AUTO_INCREMENT, 		
+	 	Id INT NOT NULL AUTO_INCREMENT, 	
         configuration VARCHAR( 5000 ) NULL,
         UNIQUE KEY id (id)
   ) DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci;";
@@ -34,7 +51,8 @@ function install_db()
   $sql = "CREATE TABLE $FinalTilesImages (
 		Id INT NOT NULL AUTO_INCREMENT, 
 		gid INT NOT NULL, 
-		imageId INT NOT NULL, 
+		type VARCHAR(10) DEFAULT \"image\" NOT NULL,
+		imageId INT NOT NULL,
 		imagePath LONGTEXT NOT NULL, 
         filters VARCHAR( 1500 ) NULL,
         link LONGTEXT NULL,

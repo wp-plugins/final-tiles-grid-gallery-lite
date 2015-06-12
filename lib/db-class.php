@@ -1,5 +1,5 @@
 <?php
-class FinalTilesLiteDB {
+class FinalTilesDB {
 	
 	private static $pInstance;
 	
@@ -8,7 +8,7 @@ class FinalTilesLiteDB {
 	public static function getInstance() 
 	{
 		if(!self::$pInstance) {
-			self::$pInstance = new FinalTilesLiteDB();
+			self::$pInstance = new FinalTilesDB();
 		}
 		
 		return self::$pInstance;
@@ -40,11 +40,9 @@ class FinalTilesLiteDB {
 	public function addGallery($data) 
 	{
 		global $wpdb;		  
-		
 		$configuration = json_encode($data);
 		
 		$data = array('configuration' => $configuration);
-		
 		$galleryAdded = $wpdb->insert( $wpdb->FinalTilesGalleries, $data);
 		return $galleryAdded;
 	}
@@ -70,22 +68,48 @@ class FinalTilesLiteDB {
 		$g = $wpdb->update($wpdb->FinalTilesGalleries, 
 						array('configuration' => $configuration),
 						array('Id' => $gid));
+						
+		//exit( var_dump( $wpdb->last_query ) );
 		return $g;
 	}
 	
-	public function getGalleryById($id) 
+	public function getGalleryById($id, $array=false) 
 	{
 		global $wpdb;
 		$query = "SELECT * FROM $wpdb->FinalTilesGalleries WHERE Id = '$id'";
 		$gallery = $wpdb->get_row($query);
 
+		if($array)
+		{
+			return get_object_vars(json_decode($gallery->configuration));
+		}
+			
 		$data = json_decode($gallery->configuration);
+		
 		
 		// compatibility checks
 		if(empty($data->wp_field_caption))
 			$data->wp_field_caption = "description";
 		if(empty($data->captionBehavior))
 			$data->captionBehavior = "hidden";
+		
+		if(empty($data->imageSizeFactor))
+			$data->imageSizeFactor = 90;
+		if(empty($data->imageSizeFactorTabletLandscape))
+			$data->imageSizeFactorTabletLandscape = 80;
+		if(empty($data->imageSizeFactorTabletPortrait))
+			$data->imageSizeFactorTabletPortrait = 70;
+		if(empty($data->imageSizeFactorPhoneLandscape))
+			$data->imageSizeFactorPhoneLandscape = 60;
+		if(empty($data->imageSizeFactorPhonePortrait))
+			$data->imageSizeFactorPhonePortrait = 50;
+
+		if(empty($data->compressHTML))
+			$data->compressHTML = 'T';
+			
+		if(empty($data->delay))
+			$data->delay = 0;
+
 		if(empty($data->captionFullHeight))
 			$data->captionFullHeight = "T";
 		if(empty($data->captionEmpty))
@@ -98,6 +122,10 @@ class FinalTilesLiteDB {
 			$data->captionOpacity = $gallery->hoverOpacity;
 		if(empty($data->captionEasing))
 			$data->captionEasing = $gallery->hoverEasing;
+		if(empty($data->captionFrame))
+			$data->captionFrame = "F";
+		if(empty($data->captionFrameColor))
+			$data->captionFrameColor = "#ffffff";
 		if(empty($data->captionEffectDuration))
 			$data->captionEffectDuration = $gallery->hoverEffectDuration;
 		if(empty($data->hoverZoom))
@@ -108,6 +136,28 @@ class FinalTilesLiteDB {
 			$data->socialIconColor = '#ffffff';
 		if(empty($data->captionIconSize))
 			$data->captionIconSize = 12;
+        if(empty($data->source))
+			$data->source = 'images';
+		if(empty($data->recentPostsCaption))
+			$data->recentPostsCaption = 'title';
+		if(empty($data->recentPostsCaptionAutoExcerptLength))
+			$data->recentPostsCaptionAutoExcerptLength = 20;
+		if(empty($data->captionMobileBehavior))
+			$data->captionMobileBehavior = "desktop";
+		if(empty($data->imagesOrder))
+			$data->imagesOrder = "user";
+		if(empty($data->beforeGalleryText))
+			$data->beforeGalleryText = "";
+		if(empty($data->afterGalleryText))
+			$data->afterGalleryText = "";
+		if(empty($data->imagesOrder) && !empty($data->shuffle))
+			$data->imagesOrder = $data->shuffle == 'T' ? "random" : "user";
+		if(empty($data->support))
+			$data->support = 'F';
+		if(empty($data->supportText))
+			$data->supportText = 'Powered by Final Tiles Grid Gallery';
+		if(empty($data->envatoReferral))
+			$data->envatoReferral = "GreenTreeLabs";
 		
         $easings = array("ease", "linear", "ease-in", "ease-out", "ease-in-out");
         if(! in_array($data->captionEasing, $easings))
@@ -116,9 +166,10 @@ class FinalTilesLiteDB {
 		return $data;
 	}
 	
-	public function getGalleries() {
+	public function getGalleries() 
+	{
 		global $wpdb;
-		$query = "SELECT Id, configuration FROM $wpdb->FinalTilesGalleries";
+		$query = "SELECT Id, configuration FROM $wpdb->FinalTilesGalleries order by id";
 		$galleryResults = $wpdb->get_results( $query );
 		
 		$result = array();
@@ -131,24 +182,35 @@ class FinalTilesLiteDB {
 		return $result;
 	}
 	
-	public function addImage($gid, $image) {
+	public function addVideo($data) 
+	{
 		global $wpdb;		
-		$imageAdded = $wpdb->insert( $wpdb->FinalTilesImages, array( 'gid' => $gid, 'imagePath' => $image, 'title' => "", 'description' => "", 'sortOrder' => 0 ) );
-		return $imageAdded;
+		$videoAdded = $wpdb->insert( $wpdb->FinalTilesImages,
+		        array( 'gid' => $data['gid'], 'imagePath' => $data['imagePath'], 'type' => 'video', 'sortOrder' => 0, 'imageId' => rand(100000, 1000000) ));
+		$id = $wpdb->insert_id;
+        $wpdb->update($wpdb->FinalTilesImages, array('sortOrder' => $id), array('id' => $id));
+		return $videoAdded;
+	}
+	
+	public function editVideo($id, $data)
+	{
+		global $wpdb;
+		$result = $wpdb->update( $wpdb->FinalTilesImages, $data, array( 'Id' => $id ) );
+		return $result;
 	}
 
-	public function addImages($gid, $images) {
+	public function addImages($gid, $images) 
+	{
 		global $wpdb;		
 
-		$pre = count($this->getImagesByGalleryId($gid));
-
 		foreach ($images as $image) {
-			if($pre++ >= strlen("localizati") + 3 + 7)
-				break;
-			$imageAdded = $wpdb->insert( $wpdb->FinalTilesImages, 
-				array( 'gid' => $gid, 'imagePath' => $image->imagePath, 
+			$data = array( 'gid' => $gid, 'imagePath' => $image->imagePath, 
      					 'description' => $image->description, 
-					'imageId' => $image->imageId, 'sortOrder' => 0, 'filters' => $images->filters ) );
+					'imageId' => $image->imageId, 'sortOrder' => 0, 'filters' => $images->filters );
+			$data['type'] = isset($image->type) ? $image->type : 'image';
+			
+				
+			$imageAdded = $wpdb->insert( $wpdb->FinalTilesImages, $data );
 			$id = $wpdb->insert_id;
 			$wpdb->update($wpdb->FinalTilesImages, array('sortOrder' => $id), array('id' => $id));
 		}
@@ -173,14 +235,15 @@ class FinalTilesLiteDB {
 		}
 	}
 	
-	public function editImage($id, $data) {
+	public function editImage($id, $data) 
+	{
 		global $wpdb;
 		$imageEdited = $wpdb->update( $wpdb->FinalTilesImages, $data, array( 'Id' => $id ) );
-		//exit( var_dump( $wpdb->last_query ) );
 		return $imageEdited;
 	}
 
-	public function sortImages($ids) {
+	public function sortImages($ids) 
+	{
 		global $wpdb;
 		$index = 1;
 		foreach($ids as $id) 
@@ -191,10 +254,15 @@ class FinalTilesLiteDB {
 		return true;
 	}
 	
-	public function getImagesByGalleryId($gid) {
+	public function getImagesByGalleryId($gid) 
+	{
 		global $wpdb;
 		$query = "SELECT * FROM $wpdb->FinalTilesImages WHERE gid = $gid ORDER BY sortOrder ASC";
 		$imageResults = $wpdb->get_results( $query );
+
+		foreach($imageResults as &$image)
+			$image->source = "gallery";
+		
 		return $imageResults;
 	}
 	
