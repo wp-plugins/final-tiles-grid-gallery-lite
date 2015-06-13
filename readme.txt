@@ -103,6 +103,9 @@ The PRO license bundles 6 different lightboxes. However you can use any other li
 
 == Changelog ==
 
+= 2.0.1 =
+* Bug fix on activation
+
 = 2.0 =
 * Major release: many new features, new admin panel with Google Material design, many bug fixes
 
