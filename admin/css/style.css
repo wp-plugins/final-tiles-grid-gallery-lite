@@ -358,21 +358,6 @@
   padding: 10px;
   margin: 10px;
 }
-#images .actions.source-posts .checkboxes strong,
-#images .actions.source-woocommerce .checkboxes strong {
-  font-weight: bold;
-  width: 90px;
-  display: inline-block;
-}
-#images .actions.source-posts .checkboxes label,
-#images .actions.source-woocommerce .checkboxes label {
-  display: inline-block;
-  margin-right: 20px;
-}
-#images .actions.source-posts .checkboxes [type="checkbox"] + label:before,
-#images .actions.source-woocommerce .checkboxes [type="checkbox"] + label:before {
-  left: 6px;
-}
 #images .actions label {
   font-weight: bold;
   cursor: default;
@@ -406,9 +391,6 @@
 }
 #images .actions .tips strong {
   font-weight: 700;
-}
-#images .source-panel {
-  display: none;
 }
 #image-panel-model[data-source=posts] {
   width: 300px;

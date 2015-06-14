@@ -4,11 +4,11 @@ Plugin Name: Final Tiles Grid Gallery Lite
 Plugin URI: http://codecanyon.net/item/final-tiles-gallery-for-wordpress/5189351?ref=GreenTreeLabs
 Description: Wordpress Plugin for creating responsive image galleries. By: Green Tree Labs
 Author: Green Tree Labs
-Version: 2.0.1
+Version: 2.0.2
 Author URI: http://codecanyon.net/user/GreenTreeLabs
 */
 
-define("FTGVERSION", "2.0.1");
+define("FTGVERSION", "2.0.2");
 define("PRO_CALL", "<span class='procall'>(<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>available with PRO version</a>)</span>");
 define("PRO_UNLOCK", "<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>Add unlimited images with PRO version</a>");
 
@@ -299,16 +299,13 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			wp_enqueue_script('media-upload');
 			wp_enqueue_script('thickbox');
 
-			//wp_register_script('futurico', WP_PLUGIN_DIR . '/final-tiles-grid-gallery-lite/admin/scripts/SCF.ui.js', array('jquery', 'chosen'));
-			//wp_enqueue_script('futurico');
-
-			wp_register_style('final-tiles-gallery-admin', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/css/style.css', array('colors'));
+			wp_register_style('final-tiles-gallery-admin', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/css/style.css', array('colors'), FTGVERSION);
 			wp_enqueue_style('final-tiles-gallery-admin');
 
 			wp_register_script('materialize', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/scripts/materialize.min.js', array('jquery'));
 			wp_enqueue_script('materialize');
 
-			wp_register_script('final-tiles-gallery', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/scripts/final-tiles-gallery-admin.js', array('jquery','media-upload','thickbox', 'materialize'));
+			wp_register_script('final-tiles-gallery', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/scripts/final-tiles-gallery-admin.js', array('jquery','media-upload','thickbox', 'materialize'), FTGVERSION);
 			wp_enqueue_script('final-tiles-gallery');
 
 			wp_enqueue_style('thickbox');
@@ -330,7 +327,6 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		public function FinalTiles_gallery_admin_style_load()
 		{
 			wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css');
-			//wp_enqueue_style('ftg-admin', WP_PLUGIN_DIR . '/final-tiles-grid-gallery-lite/admin/style.css');
 		}
 
 		//Create Admin Menu
