@@ -136,6 +136,8 @@ class FinalTilesDB {
 			$data->socialIconColor = '#ffffff';
 		if(empty($data->captionIconSize))
 			$data->captionIconSize = 12;
+		if(empty($data->captionFontSize))
+			$data->captionFontSize = 12;
         if(empty($data->source))
 			$data->source = 'images';
 		if(empty($data->recentPostsCaption))

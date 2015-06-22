@@ -120,8 +120,8 @@ var FTG = function($) {
             // !gallery save
             var data = {};
             data.action = 'save_gallery';
-            FTG.update_filters();
-            FTG.update_custom_isf();
+          //  FTG.update_filters();
+           // FTG.update_custom_isf();
 
             $(".form-fields").find("input[type=text], input[type=range], select, input:checked, input[type=hidden], textarea").each(function() {
                 var name = $(this).attr("name");
