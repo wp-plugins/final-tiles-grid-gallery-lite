@@ -1,4 +1,8 @@
 <?php
+	
+
+
+	
 function ftg_p($gallery, $field, $default = NULL)
 {
 	global $ftg_options;
@@ -243,6 +247,16 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 							<a class="btn grey lighten-1 waves-effect waves-light" onclick="alert('Filters are available with PRO version')" data-action="filter">Assign filters</a>
 							<a class="btn deep-orange darken-1 waves-effect waves-light" href="#" data-action="remove">Remove</a>
 						</div>
+
+						<div>
+							<ul>
+								<b style="float:left; font-size:16px;"> List View: </b>
+								<li id="ListView_big" style="cursor:pointer; font-size:16px; display:inline; float:left; margin-left:7px;"> Big </li>
+								<li id="ListView_medium" style="cursor:pointer; font-size:16px; display:inline; float:left; margin-left:7px;"> Medium </li>
+								<li id="ListView_small" style="cursor:pointer; font-size:16px; display:inline; float:left; margin-left:7px; "> Small </li>
+							</ul>
+						</div>
+
 						<div class="panel">
 							<strong></strong>
 							<p class="text"></p>

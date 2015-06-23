@@ -120,8 +120,8 @@ var FTG = function($) {
             // !gallery save
             var data = {};
             data.action = 'save_gallery';
-            FTG.update_filters();
-            FTG.update_custom_isf();
+            // FTG.update_filters();
+            // FTG.update_custom_isf();
 
             $(".form-fields").find("input[type=text], input[type=range], select, input:checked, input[type=hidden], textarea").each(function() {
                 var name = $(this).attr("name");
@@ -240,7 +240,128 @@ var FTG = function($) {
 
             tgm_media_frame.open();
         },
-        bind: function() {	        
+        bind: function() {	              
+           
+            $('#images').click(function() {
+                if(document.cookie.indexOf('small')>=0)
+                {
+                    Small();                
+                }
+                else if(document.cookie.indexOf('medium')>=0)
+                {
+                    Medium();
+                }
+                else if(document.cookie.indexOf('big')>=0)
+                {
+                    Big();
+                }
+            })
+            
+            FTG.load_images();    
+
+             function Big ()
+             {
+
+                $('#ListView_big').css('color','red');
+                $('#ListView_medium').css('color','black');
+                $('#ListView_small').css('color','black'); 
+
+                $("#images .item").each(function(){
+                    $(this).parent().removeClass();
+                })
+
+                $("#images .item").each(function(){
+                    $('.truncate').css('display','inline');
+                    $('.card-title').css('display','inline');
+                    $('.card-content').css('display','inline');
+                    $('.card-action').empty();
+
+                    $('.card-action').append("<a  href='#image-panel-model' class='edit modal-trigger' > Edit </a>");
+                    $('.card-action').append("<a  href='#'  > Remove </a>");
+                    $('.card-action').css('padding','20px');
+                    
+
+                    $(this).parent().addClass('col m3 s3');
+                    document.cookie='size=big;';
+                    
+                })
+
+               
+             }
+
+             function Medium()
+             {
+                document.cookie='size=medium;';
+
+                $("#images .item").each(function(){
+                    $(this).parent().removeClass();
+                })
+
+                 $("#images .item").each(function(){
+
+                    $(this).parent().addClass('col m2 s2');
+
+                    $('.truncate').css('display','inline');
+                    $('.card-title').css('display','inline');
+                    $('.card-content').css('display','inline');
+                    $('.card-action').empty();
+                    $('.card-action').css('padding','20px');
+
+                    $('.card-action').append("<a  href='#image-panel-model' class='edit modal-trigger' > Edit </a>");
+                    $('.card-action').append("<a  href='#'  > Remove </a>");
+
+
+                })
+
+                $('#ListView_medium').css('color','red');
+                $('#ListView_big').css('color','black');
+                $('#ListView_small').css('color','black');
+             }
+
+             function Small()
+             {
+                document.cookie='size=small;';
+                
+                $("#images .item").each(function(){
+                    $(this).parent().removeClass();
+                })
+                
+                 $("#images .item").each(function(){
+
+                    $('.card-action').empty();
+
+                    $('.card-action').append("<a  href='#image-panel-model' class='edit modal-trigger mdi-editor-mode-edit'> </a>");
+                    $('.card-action').append("<a  href='#' class='mdi-action-delete'> </a>");
+                    $('.card-action').css('padding','5px');
+                    $(this).parent().addClass('col m1 s1');
+                    $('.truncate').css('display','none');
+                    $('.card-title').css('display','none');
+                    $('.card-content').css('display','none');
+
+
+                })
+                $('#ListView_small').css('color','red');
+                $('#ListView_medium').css('color','black');
+                $('#ListView_big').css('color','black');
+
+             }
+
+            $('#ListView_big').click(function(){                
+              
+                  Big();
+                    
+            })
+
+            $('#ListView_medium').click(function(){
+                
+                Medium();
+            })
+
+              $('#ListView_small').click(function(){            
+                
+                Small();
+            })
+
             $("#add-submit").click(function(e) {
                 e.preventDefault();
                 FTG.add_image();

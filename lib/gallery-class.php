@@ -251,7 +251,12 @@ if (!class_exists("FinalTilesGallery"))
                 $html .= "#ftg-$this->id$rid .tile .icon { font-size:".$gallery->captionIconSize."px; }\n";
                 $html .= "#ftg-$this->id$rid .tile .icon { margin: -".($gallery->captionIconSize / 2)."px 0 0 -".($gallery->captionIconSize / 2)."px; }\n";
             }
-                
+              
+            if($gallery->captionFontSize)
+            {
+                $html .= "#ftg-$this->id$rid .tile .caption { font-size:".$gallery->captionFontSize."px; }\n";
+            }
+               
 			if($gallery->backgroundColor)
 				$html .= "#ftg-$this->id$rid .tile .tile-inner { background-color: " . $gallery->backgroundColor . "; }\n";
                 

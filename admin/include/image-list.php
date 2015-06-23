@@ -17,8 +17,9 @@ function get_image_size_links($id) {
 	ksort($result);
     return $result;
 }
-
-?>                
+	 
+?>       
+			
 			<?php foreach($imageResults as $image) { 
                 $sizes = get_image_size_links($image->imageId);
                 $thumb = "";
@@ -27,10 +28,9 @@ function get_image_size_links($id) {
                 else
                     $thumb = plugins_url('../images/video.jpg', __FILE__);
             ?>
-			
-			<div class="col s2 m2">			
+			<div class="col m2 s2" id="images_div">			
 	            <div class='item card' data-type='<?php _e($image->type) ?>' data-image-id="<?php _e($image->imageId) ?>" data-id="<?php _e($image->Id) ?>">	                
-	                <div class="figure card-image">
+	                <div class="figure card-image">	                
 		                <?php if($image->type == 'image') : ?>
 	                    <img class="thumb" src="<?php _e($thumb) ?>" />
 	                    <?php else : ?>
