@@ -103,6 +103,9 @@ The PRO license bundles 6 different lightboxes. However you can use any other li
 
 == Changelog ==
 
+= 2.0.4 =
+* Bug fix: image list not loading, "remove" button didn't remove images
+
 = 2.0.3 =
 * New feature: caption font size
 

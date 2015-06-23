@@ -487,7 +487,8 @@ var FTG = function($) {
         init: function () {
 	        $backToTop = $(".back-to-top");	        
 	        FTG.bind();
-	        $imageList = $("#image-list");
+	        FTG.load_images();
+            $imageList = $("#image-list");
         }
     }
 }(jQuery);
