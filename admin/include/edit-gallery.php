@@ -250,10 +250,10 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 
 						<div>
 							<ul>
-								<b style="float:left; font-size:16px;"> List View: </b>
-								<li id="ListView_big" style="cursor:pointer; font-size:16px; display:inline; float:left; margin-left:7px;"> Big </li>
-								<li id="ListView_medium" style="cursor:pointer; font-size:16px; display:inline; float:left; margin-left:7px;"> Medium </li>
-								<li id="ListView_small" style="cursor:pointer; font-size:16px; display:inline; float:left; margin-left:7px; "> Small </li>
+								<b class="listview"> List View: </b>
+								<li id="ListView_big" class="li"> Big </li>
+								<li id="ListView_medium" class="li" > Medium </li>
+								<li id="ListView_small" class="li"> Small </li>
 							</ul>
 						</div>
 

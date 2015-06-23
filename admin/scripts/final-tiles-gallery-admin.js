@@ -262,18 +262,20 @@ var FTG = function($) {
              function Big ()
              {
 
-                $('#ListView_big').css('color','red');
-                $('#ListView_medium').css('color','black');
-                $('#ListView_small').css('color','black'); 
+                $('#ListView_big').addClass('menu_activ');
+                $('#ListView_medium').removeClass('menu_activ');
+                $('#ListView_small').removeClass('menu_activ');
 
                 $("#images .item").each(function(){
                     $(this).parent().removeClass();
                 })
 
                 $("#images .item").each(function(){
-                    $('.truncate').css('display','inline');
-                    $('.card-title').css('display','inline');
-                    $('.card-content').css('display','inline');
+                   // $('.card-title').css('display','inline');
+                   $('.card-title').removeClass('hide');
+                    $('.truncate').removeClass('hide');
+                    $('.card-content').removeClass('hide');
+
                     $('.card-action').empty();
 
                     $('.card-action').append("<a  href='#image-panel-model' class='edit modal-trigger' > Edit </a>");
@@ -301,9 +303,10 @@ var FTG = function($) {
 
                     $(this).parent().addClass('col m2 s2');
 
-                    $('.truncate').css('display','inline');
-                    $('.card-title').css('display','inline');
-                    $('.card-content').css('display','inline');
+                    $('.truncate').removeClass('hide');
+                    $('.card-content').removeClass('hide');
+                  //  $('.card-title').css('display','inline');
+                    $('.card-title').removeClass('hide');
                     $('.card-action').empty();
                     $('.card-action').css('padding','20px');
 
@@ -313,9 +316,10 @@ var FTG = function($) {
 
                 })
 
-                $('#ListView_medium').css('color','red');
-                $('#ListView_big').css('color','black');
-                $('#ListView_small').css('color','black');
+                $('#ListView_big').removeClass('menu_activ');
+                $('#ListView_medium').addClass('menu_activ');
+                $('#ListView_small').removeClass('menu_activ');
+               
              }
 
              function Small()
@@ -334,15 +338,20 @@ var FTG = function($) {
                     $('.card-action').append("<a  href='#' class='mdi-action-delete'> </a>");
                     $('.card-action').css('padding','5px');
                     $(this).parent().addClass('col m1 s1');
-                    $('.truncate').css('display','none');
-                    $('.card-title').css('display','none');
-                    $('.card-content').css('display','none');
+               
+                  //  $('.truncate').css('display','none');
+                    // $('.card-title').css('display','none');
+                    // $('.card-content').css('display','none');
+
+                    $('.truncate').addClass('hide');
+                    $('.card-title').addClass('hide');
+                    $('.card-content').addClass('hide');
 
 
                 })
-                $('#ListView_small').css('color','red');
-                $('#ListView_medium').css('color','black');
-                $('#ListView_big').css('color','black');
+                  $('#ListView_big').removeClass('menu_activ');
+                  $('#ListView_medium').removeClass('menu_activ');
+                  $('#ListView_small').addClass('menu_activ');               
 
              }
 
