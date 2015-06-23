@@ -249,11 +249,12 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 						</div>
 
 						<div>
-							<ul>
-								<b class="listview"> List View: </b>
-								<li id="ListView_big" class="li"> Big </li>
-								<li id="ListView_medium" class="li" > Medium </li>
-								<li id="ListView_small" class="li"> Small </li>
+							<b class="listview"> List View: </b>
+							<ul class="list-view-control">
+								<!-- you cannot place a B inside a UL is invalid -->								
+								<li data-size="big" class="li"> Big </li>
+								<li data-size="medium" class="li" > Medium </li>
+								<li data-size="small" class="li"> Small </li>
 							</ul>
 						</div>
 

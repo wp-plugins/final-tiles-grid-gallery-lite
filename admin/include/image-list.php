@@ -28,7 +28,7 @@ function get_image_size_links($id) {
                 else
                     $thumb = plugins_url('../images/video.jpg', __FILE__);
             ?>
-			<div class="col m2 s2" id="images_div">			
+            <div class="col <?php print $list_size ." ". $column_size ?>">
 	            <div class='item card' data-type='<?php _e($image->type) ?>' data-image-id="<?php _e($image->imageId) ?>" data-id="<?php _e($image->Id) ?>">	                
 	                <div class="figure card-image">	                
 		                <?php if($image->type == 'image') : ?>
@@ -84,7 +84,7 @@ function get_image_size_links($id) {
 	                <div class="card-action">		              
 					  <a href="#image-panel-model" class="edit modal-trigger">Edit</a>
 					  <?php if($image->source == "gallery") : ?>
-		              <a href="#">Remove</a>
+		              <a href="#" class="remove">Remove</a>
 		              <?php endif ?>
 		            </div>
 	            </div>
