@@ -259,200 +259,75 @@ var FTG = function($) {
 
             tgm_media_frame.open();
         },
-        bind: function() {	              
-           
-            // diego
-            // why do you bind the click on the whole images panel?
-            // just bind the buttons
 
-            // this is how I'd do this task:
+        bind: function() {             
+           
+            var cook = getCookie('ftg_imglist_size');
+
+            currentListSize = cook;
+
+            if( cook == "" ){
+                currentListSize = "medium";
+            }
+
+            switch(currentListSize){
+                case "small":
+                    img_small();
+                break;
+                case "medium":
+                    img_medium();
+                break;
+                case "big":
+                    img_big();
+                break;
+            }
+
             $(".list-view-control li").click(function () {
 
-                //read the size from data-size attribute
-                currentListSize = $(this).data('size');
-                FTG.load_images();
+                currentListSize = $(this).data('size');  
 
-                // now go to see function load_images() and see 
-                // I send the list size to PHP
-            });
+                FTG.load_images(); 
+
+            });  
+
+
+            function img_big ()
+            {
+                document.cookie='ftg_imglist_size=big;';
+
+                $('#listview-big').addClass('menu_activ');
+                $('#listview-medium').removeClass('menu_activ');
+                $('#listview-small').removeClass('menu_activ');
             
+            }
 
+            function img_medium()
+            {
+                document.cookie='ftg_imglist_size=medium;'; 
 
+                $('#listview-big').removeClass('menu_activ');
+                $('#listview-medium').addClass('menu_activ');
+                $('#listview-small').removeClass('menu_activ'); 
+            }
 
-            $('#images').click(function() {
+            function img_small()
+            {
+                document.cookie='ftg_imglist_size=small;';
+                $('#listview-big').removeClass('menu_activ');
+                $('#listview-medium').removeClass('menu_activ');
+                $('#listview-small').addClass('menu_activ'); 
+            }
 
-                // diego
-                //
-                // this way is wrong, it will catch all cookies
-                // containing the string "small"
-                // we need to check only the cookie
-                // with name ftg_imglist_size
-                // I've added a function called getCookie()
-                // look at the beginning of this file
-                //
-                // your code will be:
-                // if(getCookie('ftg_imglist_size') == 'small') {...}
-
-                if(document.cookie.indexOf('small')>=0)
-                {
-                    Small();                
-                }
-                else if(document.cookie.indexOf('medium')>=0)
-                {
-                    Medium();
-                }
-                else if(document.cookie.indexOf('big')>=0)
-                {
-                    Big();
-                }
-            })
-            
-            // I moved this call inside init() 
-            //FTG.load_images();    
-
-             function Big ()
-             {
-
-                $('#ListView_big').addClass('menu_activ');
-                $('#ListView_medium').removeClass('menu_activ');
-                $('#ListView_small').removeClass('menu_activ');
-
-                $("#images .item").each(function(){
-                    $(this).parent().removeClass();
-                })
-
-                $("#images .item").each(function(){
-                   // $('.card-title').css('display','inline');
-                   $('.card-title').removeClass('hide');
-                    $('.truncate').removeClass('hide');
-                    $('.card-content').removeClass('hide');
-
-                    $('.card-action').empty();
-
-                    $('.card-action').append("<a  href='#image-panel-model' class='edit modal-trigger' > Edit </a>");
-                    $('.card-action').append("<a  href='#'  > Remove </a>");
-                    $('.card-action').css('padding','20px');
-                    
-
-                    $(this).parent().addClass('col m3 s3');
-                    document.cookie='size=big;';
-                    
-                })
-
-               
-             }
-
-             function Medium()
-             {
-                document.cookie='size=medium;';
-
-                $("#images .item").each(function(){
-                    $(this).parent().removeClass();
-                })
-
-                 $("#images .item").each(function(){
-
-                    $(this).parent().addClass('col m2 s2');
-
-                    $('.truncate').removeClass('hide');
-                    $('.card-content').removeClass('hide');
-                  //  $('.card-title').css('display','inline');
-                    $('.card-title').removeClass('hide');
-                    $('.card-action').empty();
-                    $('.card-action').css('padding','20px');
-
-                    $('.card-action').append("<a  href='#image-panel-model' class='edit modal-trigger' > Edit </a>");
-                    $('.card-action').append("<a  href='#'  > Remove </a>");
-
-
-                })
-
-                $('#ListView_big').removeClass('menu_activ');
-                $('#ListView_medium').addClass('menu_activ');
-                $('#ListView_small').removeClass('menu_activ');
-               
-             }
-
-             function Small()
-             {
-                // "size" is too generic and could conflict with
-                // other plugins or themes
-                // use the name I wrote you in my TODO:
-                // ftg_imglist_size
-                document.cookie='size=small;';
-                
-                $("#images .item").each(function(){
-                    $(this).parent().removeClass();
-                })
-                
-                 $("#images .item").each(function(){
-
-                    // diego notes:
-                    // don't manipulate html with JavaScript
-                    // just use CSS classes to show/hide HTML elements
-                    // look at image-list.php line 31:
-                    //    <div class="col m2 s2">
-                    // add a class there, for example:
-                    //    <div class="col m1 s1 item-small">
-                    //  or
-                    //    <div class="col m2 s2 item-medium">
-                    //  or
-                    //    <div class="col m3 s4 item-big">
-                    //
-                    // for example, with item-small class
-                    // you hide the caption via CSS:
-                    // 
-                    //  #image-list .item-small .card-content {
-                    //     display: none;
-                    //  }
-
-
-                    // don't do it
-                    $('.card-action').empty();
-
-                    // don't do it
-                    $('.card-action').append("<a  href='#image-panel-model' class='edit modal-trigger mdi-editor-mode-edit'> </a>");
-                    $('.card-action').append("<a  href='#' class='mdi-action-delete'> </a>");
-                    
-                    // never do it ;)
-                    // all styles MUST always be set by a CSS class
-                    // with javascript you add or remove classes
-                    $('.card-action').css('padding','5px');
-
-                    // as explained, print the classes from PHP
-                    // by reading $_COOKIE['ftg_imglist_size']
-                    $(this).parent().addClass('col m1 s1');
-               
-                  //  $('.truncate').css('display','none');
-                    // $('.card-title').css('display','none');
-                    // $('.card-content').css('display','none');
-
-                    $('.truncate').addClass('hide');
-                    $('.card-title').addClass('hide');
-                    $('.card-content').addClass('hide');
-
-
-                })
-                  $('#ListView_big').removeClass('menu_activ');
-                  $('#ListView_medium').removeClass('menu_activ');
-                  $('#ListView_small').addClass('menu_activ');               
-
-             }
-
-            $('#ListView_big').click(function(){                
-              
-                  Big();
-                    
+            $('#listview-big').click(function(){   
+                img_big();                    
             })
 
-            $('#ListView_medium').click(function(){
-                
-                Medium();
+            $('#listview-medium').click(function(){                
+                img_medium();
             })
 
-              $('#ListView_small').click(function(){            
-                
-                Small();
+              $('#listview-small').click(function(){    
+                img_small();
             })
 
             $("#add-submit").click(function(e) {

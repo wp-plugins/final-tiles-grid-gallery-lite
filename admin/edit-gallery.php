@@ -42,9 +42,7 @@
         </div>
 
         <script>
-        <?php if(!isset($_COOKIE['FTG_IMGLIST_SIZE'])) 
-        	
-         ?>
+      
             (function ($) {
             	window.onload = function () {
 	                

@@ -468,7 +468,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		}
 
 		public function refresh_gallery()
-		{
+		{		
 			if($_POST['source'] == 'images')
 				$this->list_images();
 			if($_POST['source'] == 'posts')
@@ -484,7 +484,6 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			if(check_admin_referer('FinalTiles_gallery','FinalTiles_gallery'))
 			{
 				$result = false;
-
                 
 				    $type = $_POST['type'];
 				    $imageUrl = stripslashes($_POST['img_url']);
@@ -534,24 +533,29 @@ if (!class_exists("FinalTiles_GalleryLite"))
 				$gid = intval($_POST["gid"]);
 				$imageResults = $this->FinalTilesdb->getImagesByGalleryId($gid);
 
-				$list_size = 'medium';
-				$column_size = 's2 m2';
-				// diego
-				// if(isset($_COOKIE['ftg_imglist_size']))
-				//		$list_size = $_COOKIE['ftg_imglist_size'];
-				// if(isset($_POST['list_size']))
-				// {
-				//		$list_size = $_POST['list_size'];
-				//		setcookie('ftg_imglist_size', $_POST['list_size']);
-				//     				
-				// }
-				// if($_POST['list_size'] == 'small')
-				// 		$column_size = 's1 m1';
-				// if($_POST['list_size'] == 'medium')
-				//		$column_size = 's2 m2';
-				// if($_POST['list_size'] == 'big')
-				//		$column_size = 's3 m3';
+				
+				if(isset($_COOKIE['ftg_imglist_size']))
+				{
+					$list_size = $_COOKIE['ftg_imglist_size'];
+				}
+				else 
+				{		
+					setcookie('ftg_imglist_size','medium');
+				}
 
+				if(isset($_POST['list_size']))
+				{
+					$list_size = $_POST['list_size'];
+					// setcookie('ftg_imglist_size', $_POST['list_size']);
+					$_COOKIE["ftg_imglist_size"]=$_POST['list_size'];
+				    				
+				}
+				if($_POST['list_size'] == 'small')
+						$column_size = 's1 m1';
+				if($_POST['list_size'] == 'medium')
+						$column_size = 's2 m2';
+				if($_POST['list_size'] == 'big')
+						$column_size = 's3 m3';
 
 				include('admin/include/image-list.php');
 			}

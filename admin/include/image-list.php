@@ -17,9 +17,8 @@ function get_image_size_links($id) {
 	ksort($result);
     return $result;
 }
-	 
 ?>       
-			
+		
 			<?php foreach($imageResults as $image) { 
                 $sizes = get_image_size_links($image->imageId);
                 $thumb = "";
@@ -40,7 +39,10 @@ function get_image_size_links($id) {
 	                    <?php endif ?>
 	                    
 	                    <?php if(in_array($image->imagePath, $sizes)) : ?>
+
+	                 <?php if($list_size!="small"): ?>
 	                    <span class='card-title'><?php print array_search($image->imagePath, $sizes) ?></span>
+	                <?php endif; ?>
 	                    <?php endif ?>
 	                    <?php 
 	                    if(! empty($image->filters))
@@ -57,8 +59,10 @@ function get_image_size_links($id) {
 	                    
 	                    ?>
 	                </div>
+	               <?php if($list_size!="small"): ?>        
 	                <div class="card-content">
 		                <p class="truncate">
+
 			                <?php _e(htmlentities($image->description)) ?>
 		                </p>
 	                
@@ -81,10 +85,14 @@ function get_image_size_links($id) {
 	                    <pre class="hidden description"><?php _e($image->description) ?></pre>
 	                    <pre class="hidden imagepath"><?php _e(htmlentities($image->imagePath)) ?></pre>
 	                </div>
-	                <div class="card-action">		              
-					  <a href="#image-panel-model" class="edit modal-trigger">Edit</a>
+		            <?php endif;?>
+
+	                <div class="<?php if($list_size=="small") echo "padd"; else echo "card-action";  ?>">		              
+					  <a href="#image-panel-model" class="<?php print $list_size=="small" ?  "edit modal-trigger mdi-editor-mode-edit" : "edit modal-trigger"; ?>">
+					 	<?php if($list_size!="small") echo "Edit"; ?>
+					  </a>
 					  <?php if($image->source == "gallery") : ?>
-		              <a href="#" class="remove">Remove</a>
+		              <a href="#" class="<?php print $list_size=="small" ?  "remove mdi-action-delete" :  "remove"; ?>"><?php if($list_size!="small") echo "Remove"; ?></a>
 		              <?php endif ?>
 		            </div>
 	            </div>
