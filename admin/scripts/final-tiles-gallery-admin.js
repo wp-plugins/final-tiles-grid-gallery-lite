@@ -44,12 +44,7 @@ var FTG = function($) {
 			var data = {
 				action: 'refresh_gallery',
                 source: source,
-
-                // diego
-                // I've added the list size to the ajax call
                 list_size: currentListSize,
-
-
                 FinalTiles_gallery: $('#FinalTiles_gallery').val(),
                 gid: $("#gallery-id").val()
 			};
@@ -261,74 +256,15 @@ var FTG = function($) {
         },
 
         bind: function() {             
-           
-            var cook = getCookie('ftg_imglist_size');
-
-            currentListSize = cook;
-
-            if( cook == "" ){
-                currentListSize = "medium";
-            }
-
-            switch(currentListSize){
-                case "small":
-                    img_small();
-                break;
-                case "medium":
-                    img_medium();
-                break;
-                case "big":
-                    img_big();
-                break;
-            }
-
+            
+            $("#listview-" + getCookie('ftg_imglist_size')).addClass("menu_activ");
             $(".list-view-control li").click(function () {
-
                 currentListSize = $(this).data('size');  
-
                 FTG.load_images(); 
-
+                $(".list-view-control li").removeClass("menu_activ");
+                $(this).addClass("menu_activ");
             });  
 
-
-            function img_big ()
-            {
-                document.cookie='ftg_imglist_size=big;';
-
-                $('#listview-big').addClass('menu_activ');
-                $('#listview-medium').removeClass('menu_activ');
-                $('#listview-small').removeClass('menu_activ');
-            
-            }
-
-            function img_medium()
-            {
-                document.cookie='ftg_imglist_size=medium;'; 
-
-                $('#listview-big').removeClass('menu_activ');
-                $('#listview-medium').addClass('menu_activ');
-                $('#listview-small').removeClass('menu_activ'); 
-            }
-
-            function img_small()
-            {
-                document.cookie='ftg_imglist_size=small;';
-                $('#listview-big').removeClass('menu_activ');
-                $('#listview-medium').removeClass('menu_activ');
-                $('#listview-small').addClass('menu_activ'); 
-            }
-
-            $('#listview-big').click(function(){   
-                img_big();                    
-            })
-
-            $('#listview-medium').click(function(){                
-                img_medium();
-            })
-
-              $('#listview-small').click(function(){    
-                img_small();
-            })
 
             $("#add-submit").click(function(e) {
                 e.preventDefault();

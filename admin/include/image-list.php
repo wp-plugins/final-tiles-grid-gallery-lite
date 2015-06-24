@@ -44,20 +44,6 @@ function get_image_size_links($id) {
 	                    <span class='card-title'><?php print array_search($image->imagePath, $sizes) ?></span>
 	                <?php endif; ?>
 	                    <?php endif ?>
-	                    <?php 
-	                    if(! empty($image->filters))
-	                    {
-		                	print "<ul class='filters'>";
-		                	
-		                	foreach(explode('|', $image->filters) as $f)
-		                	{
-			                	print "<li>$f</li>";
-		                	}
-		                		
-		                	print "<ul>";
-	                    }
-	                    
-	                    ?>
 	                </div>
 	               <?php if($list_size!="small"): ?>        
 	                <div class="card-content">
