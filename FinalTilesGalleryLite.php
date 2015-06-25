@@ -529,24 +529,21 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		public function list_images()
 		{
 			if(check_admin_referer('FinalTiles_gallery','FinalTiles_gallery'))
-			{
+			{  
+
 				$gid = intval($_POST["gid"]);
 				$imageResults = $this->FinalTilesdb->getImagesByGalleryId($gid);
 				
 				$list_size = "medium";
 				$column_size = "s2 m2";
-
-				if(isset($_COOKIE['ftg_imglist_size']))
-				{
-					$list_size = $_COOKIE['ftg_imglist_size'];
-				}
 				
-				if(isset($_POST['list_size']))
-				{
+				if(isset($_POST['list_size']) && !empty($_POST['list_size']))
+				{				
 					$list_size = $_POST['list_size'];
 				}
 
 				setcookie('ftg_imglist_size', $list_size);
+				$_COOKIE['ftg_imglist_size'] = $list_size;
 
 				if($list_size == 'small')
 					$column_size = 's1 m1';
@@ -676,7 +673,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'customCaptionIcon' => $_POST['ftg_customCaptionIcon'],
 			                  'captionIconColor' => $_POST['ftg_captionIconColor'],
 			                  'captionIconSize' => intval($_POST['ftg_captionIconSize']),
-			                   'captionFontSize' => intval($_POST['ftg_captionFontSize']),
+			                  'captionFontSize' => intval($_POST['ftg_captionFontSize']),
 			                  'hoverZoom' => intval($_POST['ftg_hoverZoom']),
 			                  'hoverRotation' => intval($_POST['ftg_hoverRotation']),
 			                  'hoverIconRotation' => $this->checkboxVal('ftg_hoverIconRotation'),

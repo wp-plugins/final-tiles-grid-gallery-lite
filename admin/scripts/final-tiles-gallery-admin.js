@@ -38,9 +38,9 @@ var FTG = function($) {
         load_images: function() {
             if (!_loading)
                 FTG.show_loading();
-
             var source = $("[name=ftg_source]").val();
             var post_type = '';
+
 			var data = {
 				action: 'refresh_gallery',
                 source: source,
@@ -48,7 +48,7 @@ var FTG = function($) {
                 FinalTiles_gallery: $('#FinalTiles_gallery').val(),
                 gid: $("#gallery-id").val()
 			};
-			
+
             $.post(ajaxurl, data, function(html) {
                 $("#image-list").empty().append(html);
                 if (source == 'images') {
@@ -255,14 +255,17 @@ var FTG = function($) {
             tgm_media_frame.open();
         },
 
-        bind: function() {             
-            
+        bind: function() {
+
             $("#listview-" + getCookie('ftg_imglist_size')).addClass("menu_activ");
+            currentListSize = getCookie('ftg_imglist_size');
             $(".list-view-control li").click(function () {
+
                 currentListSize = $(this).data('size');  
                 FTG.load_images(); 
                 $(".list-view-control li").removeClass("menu_activ");
                 $(this).addClass("menu_activ");
+
             });  
 
 

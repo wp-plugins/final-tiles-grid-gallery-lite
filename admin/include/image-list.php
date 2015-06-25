@@ -40,12 +40,9 @@ function get_image_size_links($id) {
 	                    
 	                    <?php if(in_array($image->imagePath, $sizes)) : ?>
 
-	                 <?php if($list_size!="small"): ?>
 	                    <span class='card-title'><?php print array_search($image->imagePath, $sizes) ?></span>
-	                <?php endif; ?>
 	                    <?php endif ?>
 	                </div>
-	               <?php if($list_size!="small"): ?>        
 	                <div class="card-content">
 		                <p class="truncate">
 
@@ -71,15 +68,21 @@ function get_image_size_links($id) {
 	                    <pre class="hidden description"><?php _e($image->description) ?></pre>
 	                    <pre class="hidden imagepath"><?php _e(htmlentities($image->imagePath)) ?></pre>
 	                </div>
-		            <?php endif;?>
 
-	                <div class="<?php if($list_size=="small") echo "padd"; else echo "card-action";  ?>">		              
-					  <a href="#image-panel-model" class="<?php print $list_size=="small" ?  "edit modal-trigger mdi-editor-mode-edit" : "edit modal-trigger"; ?>">
-					 	<?php if($list_size!="small") echo "Edit"; ?>
+	                <div class="card-action">	                              
+					  <a href="#image-panel-model" class="edit modal-trigger">
+					  	<i class="mdi-editor-mode-edit"> </i> 
+					 	<span>Edit</span>					  	
 					  </a>
+
 					  <?php if($image->source == "gallery") : ?>
-		              <a href="#" class="<?php print $list_size=="small" ?  "remove mdi-action-delete" :  "remove"; ?>"><?php if($list_size!="small") echo "Remove"; ?></a>
+		              <a href="#" class="remove"> 
+		              	<span> Remove </span>
+		              	<i class="mdi-action-delete"> </i>
+
+		              </a>
 		              <?php endif ?>
+
 		            </div>
 	            </div>
 			</div>
