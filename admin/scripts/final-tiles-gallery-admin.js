@@ -257,8 +257,11 @@ var FTG = function($) {
 
         bind: function() {
 
-            $("#listview-" + getCookie('ftg_imglist_size')).addClass("menu_activ");
-            currentListSize = getCookie('ftg_imglist_size');
+            currentListSize = 'medium';
+            if(getCookie('ftg_imglist_size'))
+                currentListSize = getCookie('ftg_imglist_size');
+            $("#listview-" + currentListSize).addClass("menu_activ");
+            
             $(".list-view-control li").click(function () {
 
                 currentListSize = $(this).data('size');  
