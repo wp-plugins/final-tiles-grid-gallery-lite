@@ -20,12 +20,6 @@ if (!class_exists("FinalTilesGallery"))
 				case "images":
 					$this->getImages();
 					break;
-				case "posts":
-					$this->getPosts();
-					break;
-				case "woocommerce":
-					$this->getWooProducts();
-					break;				
 			}
 			
 			$attIDs = array();
@@ -155,19 +149,6 @@ if (!class_exists("FinalTilesGallery"))
 
 		  return $text;
 		}
-
-		static public function getFilters($filters)
-		{
-			if(empty($filters))
-				return "";
-
-			$css = array();
-			foreach (explode("|", $filters) as $f) {
-				$css[] = "ftg-set-" . FinalTilesGallery::slugify($f);
-			}
-
-			return implode(" ", $css);
-		} 
 		
 		public function useCaptions()
 		{
@@ -177,14 +158,6 @@ if (!class_exists("FinalTilesGallery"))
 					return true;
 				
 				return $this->gallery->wp_field_caption != 'none';
-			}
-			if($this->gallery->source == "posts")
-			{
-				return $this->gallery->recentPostsCaption != 'none';
-			}
-			if($this->gallery->source == "woocommerce")
-			{
-				return true;
 			}
 			return false;
 		}
@@ -334,17 +307,6 @@ if (!class_exists("FinalTilesGallery"))
 			$html .= "</style>\n";
 			                        	           			
             $html .= "<div class='final-tiles-gallery captions-$gallery->captionBehavior hover-$gallery->captionEffect ". ($gallery->captionFullHeight == 'T' ? "caption-full-height" : "caption-auto-height") ."' id='ftg-$this->id$rid' style='width:$gallery->width'>\n";
-            if(strlen($gallery->filters))
-            {
-            	$filters = explode("|", $gallery->filters);
-            	$html .= "<div class='ftg-filters'>\n";
-            	$html .= "\t<a href='#ftg-set-ftgall' class='selected'>All</a>\n";
-            	foreach($filters as $filter)
-            	{
-            		$html .= "\t<a href='#ftg-set-". FinalTilesGallery::slugify($filter) ."'>$filter</a>\n";
-            	}
-            	$html .= "</div>\n";
-            }
             $html .= "<div class='ftg-items'>\n";
             $html .= "\t<div class='loading-bar'><i></i></div>\n";
 
@@ -359,10 +321,7 @@ if (!class_exists("FinalTilesGallery"))
                 if(property_exists($image, "type") && $image->type == "video")               
                     $data_keep_aspect_ratio = 'data-ftg-keep-aspect-ratio="true"';
 
-                if(!property_exists($image, "filters"))
-                	$image->filters = "";
-
-            	$html .= "<div $data_keep_aspect_ratio class='tile ". FinalTilesGallery::getFilters($image->filters) ."'>\n";
+            	$html .= "<div $data_keep_aspect_ratio class='tile'>\n";
 
                if(property_exists($image, "type") && $image->type == "video")
                {
@@ -382,21 +341,10 @@ if (!class_exists("FinalTilesGallery"))
                         {
                             if(! empty($image->description) && $this->useCaptions())
                                 $html .= "\t<span class='text'>$image->description</span>\n";
-                        }
-                        if(($gallery->source == "posts" || $gallery->source == "woocommerce") && $this->useCaptions())
-                        {
-                            $html .= "\t<span class='text'>$image->description</span>\n";                            
-                        }
+                        }                        
                         $html .= "</span>\n";
                     }
                     $html .= "</a>\n";
-                    if($gallery->source == "woocommerce")
-                    {
-	                    $html .= "<div class='woo'>";
-                        $html .= "\t<span class='price'>". $image->price . get_woocommerce_currency_symbol() . "</span>\n";
-                        $html .= "\t<a href='".get_site_url()."/cart/?add-to-cart=".$image->postID ."'><i class='fa fa-shopping-cart add-to-cart'></i></a>";
-                        $html .= "</div>";
-                    }
                     $html .= "<div class='ftg-social'>\n";
 
                     if($gallery->enableFacebook == "T") 
@@ -521,129 +469,7 @@ if (!class_exists("FinalTilesGallery"))
 				return '';
 			}
 		}
-		
-		public function getWooProducts()
-		{
-			$args = array(
-				'order' 				=> 'DESC',
-				'orderby' 				=> 'date',
-				'post_status'			=> array('publish'),
-				'meta_query'			=> '_thumbnail_id',
-				'ignore_sticky_posts' 	=> 1,
-				'nopaging'				=> true,
-				'post_type'				=> 'product',
-				'meta_query'			=> array(
-					array(
-			            'key'           => '_visibility',
-			            'value'         => array('catalog', 'visible'),
-			            'compare'       => 'IN'
-			        )
-				)
-			);
-
-			if($this->gallery->woo_categories)
-			{
-				$args['tax_query'] = array(
-					array(
-						'taxonomy'      => 'product_cat',
-			            'field' 		=> 'term_id',
-			            'terms'         => explode(",", $this->gallery->woo_categories),
-			            'operator'      => 'IN'	
-					)						
-				);
-			}			
-
-            $posts = get_posts($args);
-            
-            $imageResults = array();
-//          print_r($posts);
-			foreach ($posts as &$post)
-            {
-			    $post_thumbnail_id = get_post_thumbnail_id($post->ID);
-                if($post_thumbnail_id)
-                {
-                    $item = new stdClass;
-                    $item->attID = $post_thumbnail_id;
-                    $item->imagePath = get_post_meta( $post->ID, 'ftg_image_url', true);
-                    $item->filters = get_post_meta( $post->ID, 'ftg_filters', true);
-                    $item->price = get_post_meta( $post->ID, '_price', true);
-	                $item->description = $post->post_title;	                
-	                $item->postID = $post->ID;
-	                
-					if(empty($item->imagePath))
-					{
-	                	$attr = wp_get_attachment_image_src( $post_thumbnail_id, $this->gallery->defaultWooImageSize);     
-						$item->imagePath = $attr[0];
-                	}   
-                    
-                    if(empty($this->gallery->lightbox))
-	                    $item->link = get_permalink($post->ID);
-	                    
-                    $this->images[] = $item;
-				    //unset($post, $post_thumbnail_id);
-                }
-            }           
-		}
-		
-		public function getPosts()
-		{
-			$args = array(					
-				'order' 				=> 'DESC',
-				'orderby' 				=> 'date',
-				'post_status'			=> array('publish'),
-				'meta_query'			=> '_thumbnail_id',					
-				'ignore_sticky_posts' 	=> 1,
-				'nopaging'				=> true
-			);
-			
-			if($this->gallery->post_types)
-				$args['post_type'] = explode(",", $this->gallery->post_types);
-			
-			if($this->gallery->post_categories)
-				$args['category__in'] = $this->gallery->post_categories;
-			
-			$posts = get_posts($args);
-            $imageResults = array();
-
-			foreach ($posts as &$post)
-            {
-			    $post_thumbnail_id = get_post_thumbnail_id($post->ID);
-			    
-			    
-                if($post_thumbnail_id)
-                {
-                    $item = new stdClass;
-                    $item->attID = $post_thumbnail_id;
-                    $item->imagePath = get_post_meta( $post->ID, 'ftg_image_url', true);
-                    $item->filters = get_post_meta( $post->ID, 'ftg_filters', true);                  
-                    
-                    switch($this->gallery->recentPostsCaption)
-                    {
-	                    case "title":
-	                		$item->description = $post->post_title;
-	                		break;
-	                	case "excerpt":
-	                		$item->description = $post->post_excerpt;
-	                		break;
-	                	case "auto-excerpt":
-	                		$item->description = $this->auto_excerpt($post, $this->gallery->recentPostsCaptionAutoExcerptLength, "...");
-	                		break;
-                    }
-
-                 	if(empty($item->imagePath))
-                 	{
-	                 	$attr = wp_get_attachment_image_src( $post_thumbnail_id, $this->gallery->defaultPostImageSize);     
-					 	$item->imagePath = $attr[0];
-                 	}   
-                    
-                    if(empty($this->gallery->lightbox))
-	                    $item->link = get_permalink($post->ID);
-	                    	                
-                    $this->images[] = $item;
-				    //unset($post, $post_thumbnail_id);
-                }
-            }       
-		}
+				
 		
 		public function getImages() 
 		{
