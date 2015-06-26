@@ -242,7 +242,10 @@ if (!class_exists("FinalTilesGallery"))
 				
 			if($gallery->borderSize)
 				$html .= "#ftg-$this->id$rid .tile { border: " . $gallery->borderSize . "px solid " . $gallery->borderColor . "; }\n";
-        
+        	
+        	if($gallery->loadingBarColor)
+				$html .= ".final-tiles-gallery .ftg-items .loading-bar { background:" . $gallery->loadingBarColor  . "; }\n";
+        		           
             if($gallery->captionIconColor)
                 $html .= "#ftg-$this->id$rid .tile .icon { color:".$gallery->captionIconColor."; }\n";                           
                 

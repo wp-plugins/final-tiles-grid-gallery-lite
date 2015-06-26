@@ -626,6 +626,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			    $captionOpacity = intval($_POST['ftg_captionOpacity']);
 			    $borderSize = intval($_POST['ftg_borderSize']);
 			    $borderColor = $_POST['ftg_borderColor'];
+			    $loadingBarColor=$_POST['ftg_loadingBarColor'];
 			    $borderRadius = intval($_POST['ftg_borderRadius']);
 			    $shadowColor = $_POST['ftg_shadowColor'];
 			    $shadowSize = intval($_POST['ftg_shadowSize']);
@@ -680,6 +681,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'wp_field_caption' => $wp_field_caption,
 			                  'borderSize' => $borderSize,
 			                  'borderColor' => $borderColor,
+			                  'loadingBarColor'=>$loadingBarColor,
 			                  'enlargeImages' => $enlargeImages,
 			                  'backgroundColor' => $backgroundColor,
 			                  'borderRadius' => $borderRadius,
@@ -1235,6 +1237,13 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                    "name" => "Border color",
 	                    "type" => "color",
 	                    "description" => "Color of the border when size is greater than 0.",
+	                    "default" => "#000000",
+	                    "excludeFrom" => array()
+	                ),
+	                "loadingBarColor"=>array(
+	                    "name" => "Loading Bar color",
+	                    "type" => "color",
+	                    "description" => "Color of the loading bar",
 	                    "default" => "#000000",
 	                    "excludeFrom" => array()
 	                ),
