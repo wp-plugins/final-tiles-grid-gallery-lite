@@ -829,7 +829,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "margin" => array(
 	                    "name" => "Margin",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Margin between images",
 	                    "mu" => "px",
 	                    "min" => 0,
@@ -896,7 +896,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "minTileWidth" => array(
 	                    "name" => "Tile minimum width",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Minimum width of each tile, <strong>multiply this value for the image size factor to get the real size</strong>.",
 	                    "mu" => "px",
 	                    "min" => 50,
@@ -924,7 +924,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "gridCellSize" => array(
 	                    "name" => "Size of the grid",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "default" => 25,
 	                    "min" => 1,
 	                    "max" => 100,
@@ -1091,7 +1091,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "captionIconSize" => array(
 	                	"name" => "Caption icon size",
-	                	"type" => "text",
+	                	"type" => "number",
 	                	"description" => "Size of the icon in captions.",
 	                	"default" => 12,
 	                	"min" => 10,
@@ -1101,7 +1101,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                 "captionFontSize" => array(
 	                	"name" => "Caption font size",
-	                	"type" => "text",
+	                	"type" => "number",
 	                	"description" => "Size of the font in captions.",
 	                	"default" => 12,
 	                	"min" => 10,
@@ -1217,7 +1217,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
             	"fields" => array(
 	                "borderSize" => array(
 	                    "name" => "Border size",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Size of the border of each image.",
 	                    "default" => 0,
 	                    "min" => 0,
@@ -1227,7 +1227,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "borderRadius" => array(
 	                    "name" => "Border radius",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Border radius of the images.",
 	                    "default" => 0,
 	                    "min" => 0,
@@ -1258,7 +1258,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "shadowSize" => array(
 	                    "name" => "Shadow size",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Shadow size of the images.",
 	                    "default" => 0,
 	                    "min" => 0,

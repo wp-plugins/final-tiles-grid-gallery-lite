@@ -12,6 +12,17 @@ function getCookie(cname) {
     return "";
 }
 
+function isNumberKey(evt)
+ {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+
+     if (charCode != 46 && charCode > 31
+     && (charCode < 48 || charCode > 57))
+     return false;
+
+    return true;
+ }
+
 var FTG = function($) {
     var _loading = null;
     var $backToTop = null;

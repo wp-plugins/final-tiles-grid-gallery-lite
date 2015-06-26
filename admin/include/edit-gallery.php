@@ -1,8 +1,5 @@
 <?php
 	
-
-
-	
 function ftg_p($gallery, $field, $default = NULL)
 {
 	global $ftg_options;
@@ -158,10 +155,15 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 							</div>
 							
 
+
 						<?php elseif($data["type"] == "color") : ?>
 							<div class="text">
 							<input type="text" size="6" data-default-color="<?php print $data["default"] ?>" name="ftg_<?php print $f ?>" value="<?php ftg_p($gallery, $f, $data["default"])  ?>" class='pickColor' />							</div>
 
+						<?php elseif($data["type"] == "number") : ?>
+							<div class="text">
+								<input type="text" name="ftg_<?php print $f ?>"  onkeypress="return isNumberKey(event);" value="<?php ftg_p($gallery, $f, $data["default"]) ?>"  >	
+							</div>
 						<?php elseif($data["type"] == "PRO_FEATURE") : ?>
 
 							<div class="pro-cell">
