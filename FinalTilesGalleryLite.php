@@ -627,6 +627,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			    $borderSize = intval($_POST['ftg_borderSize']);
 			    $borderColor = $_POST['ftg_borderColor'];
 			    $loadingBarColor=$_POST['ftg_loadingBarColor'];
+			    $loadingBarBackgroundColor=$_POST['ftg_loadingBarBackgroundColor'];
 			    $borderRadius = intval($_POST['ftg_borderRadius']);
 			    $shadowColor = $_POST['ftg_shadowColor'];
 			    $shadowSize = intval($_POST['ftg_shadowSize']);
@@ -682,6 +683,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'borderSize' => $borderSize,
 			                  'borderColor' => $borderColor,
 			                  'loadingBarColor'=>$loadingBarColor,
+			                  'loadingBarBackgroundColor'=>$loadingBarBackgroundColor,
 			                  'enlargeImages' => $enlargeImages,
 			                  'backgroundColor' => $backgroundColor,
 			                  'borderRadius' => $borderRadius,
@@ -1244,6 +1246,13 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                    "name" => "Loading Bar color",
 	                    "type" => "color",
 	                    "description" => "Color of the loading bar",
+	                    "default" => "#000000",
+	                    "excludeFrom" => array()
+	                ),
+	                "loadingBarBackgroundColor"=>array(
+	                    "name" => "Loading Bar background color",
+	                    "type" => "color",
+	                    "description" => "Background color of the loading bar",
 	                    "default" => "#000000",
 	                    "excludeFrom" => array()
 	                ),
