@@ -1253,7 +1253,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                    "name" => "Loading Bar background color",
 	                    "type" => "color",
 	                    "description" => "Background color of the loading bar",
-	                    "default" => "#000000",
+	                    "default" => "#cccccc",
 	                    "excludeFrom" => array()
 	                ),
 	                "shadowSize" => array(
