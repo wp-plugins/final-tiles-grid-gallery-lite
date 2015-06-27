@@ -655,6 +655,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'enablePinterest' => $enablePinterest,
 			                  'imagesOrder' => $imagesOrder,
 			                  'compressHTML' => $this->checkboxVal('ftg_compressHTML'),
+			                  'sequentialImageLoading' =>$this->checkboxVal('ftg_sequentialImageLoading'),
 			                  'socialIconColor' => $_POST['ftg_socialIconColor'],
 			                  'recentPostsCaption' => $_POST['ftg_recentPostsCaption'],
 			                  'recentPostsCaptionAutoExcerptLength' => intval($_POST['ftg_recentPostsCaptionAutoExcerptLength']),
@@ -956,6 +957,13 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                    "description" => "Enable or disable HTML compression, some themes prefer uncompressed, switch it off in case of problems.",
 	                    "default" => "T",
 	                    "excludeFrom" => array()
+	                ),
+	                "sequentialImageLoading"=>array(
+	                	"name"=>"Sequential image loading",
+	                	"type"=>"toggle",
+	                	"description"=>"Load images sequentially for higher performances. N.B.: search engines won't index your images if sequential loading is activated.",
+	                	"default"=>"T",
+	                	"excludeFrom"=>array()
 	                ),
 	            )
             ),

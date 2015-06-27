@@ -152,8 +152,7 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 								<p class="range-field">
 							      <input name="ftg_<?php print $f ?>" value="<?php ftg_p($gallery, $f, $data["default"]) ?>" type="range" min="<?php print $data["min"] ?>" max="<?php print $data["max"] ?>" />
 							    </p>
-							</div>
-							
+							</div>							
 
 
 						<?php elseif($data["type"] == "color") : ?>
@@ -162,7 +161,7 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 
 						<?php elseif($data["type"] == "number") : ?>
 							<div class="text">
-								<input type="text" name="ftg_<?php print $f ?>"  onkeypress="return isNumberKey(event);" value="<?php ftg_p($gallery, $f, $data["default"]) ?>"  >	
+								<input type="text" name="ftg_<?php print $f ?>" class="integer-only"  value="<?php ftg_p($gallery, $f, $data["default"]) ?>"  >	
 							</div>
 						<?php elseif($data["type"] == "PRO_FEATURE") : ?>
 

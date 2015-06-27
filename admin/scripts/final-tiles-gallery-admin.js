@@ -12,16 +12,6 @@ function getCookie(cname) {
     return "";
 }
 
-function isNumberKey(evt)
- {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-
-     if (charCode != 46 && charCode > 31
-     && (charCode < 48 || charCode > 57))
-     return false;
-
-    return true;
- }
 
 var FTG = function($) {
     var _loading = null;
@@ -274,7 +264,6 @@ var FTG = function($) {
             $("#listview-" + currentListSize).addClass("menu_activ");
             
             $(".list-view-control li").click(function () {
-
                 currentListSize = $(this).data('size');  
                 FTG.load_images(); 
                 $(".list-view-control li").removeClass("menu_activ");
@@ -282,6 +271,15 @@ var FTG = function($) {
 
             });  
 
+            $(".field .text .integer-only").keypress(function(e){
+                var charCode = (e.which) ? e.which : e.keyCode;
+
+                if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+
+                return true;
+            });
 
             $("#add-submit").click(function(e) {
                 e.preventDefault();

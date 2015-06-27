@@ -106,7 +106,10 @@ class FinalTilesDB {
 
 		if(empty($data->compressHTML))
 			$data->compressHTML = 'T';
-			
+		
+		if(empty($data->sequentialImageLoading))
+			$data->sequentialImageLoading = 'T';
+
 		if(empty($data->delay))
 			$data->delay = 0;
 

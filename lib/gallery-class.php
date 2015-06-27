@@ -330,7 +330,11 @@ if (!class_exists("FinalTilesGallery"))
                else
                {	               
                     $html .= "<a $title=\"".htmlspecialchars($image->description, ENT_QUOTES)."\" ". ($gallery->lightbox == "lightbox2" && empty($image->link) ? "data-lightbox='gallery'" : "") ." rel='$rel' " . ($this->getTarget($image)) . " class='tile-inner " . $gallery->aClass . " " . ($this->getLightboxClass($image)) . "' " . $this->getLink($image) . " data-big='".$this->getBigImage($image)."'>\n";
-                    $html .= "<img class='item' data-ftg-src='$image->imagePath' />\n";
+
+                    $src= $gallery->sequentialImageLoading == "T" ? "" : $image->imagePath;
+
+					$html .= "<img class='item'  data-ftg-src='$image->imagePath'  src='$src'  />\n";							 
+
 
                     if((! empty($image->description) && $this->useCaptions()) || $gallery->captionEmpty == "show" || $this->hasCaptionIcon())
                     {
