@@ -42,6 +42,7 @@
         </div>
 
         <script>
+      
             (function ($) {
             	window.onload = function () {
 	                

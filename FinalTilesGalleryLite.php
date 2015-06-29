@@ -4,11 +4,11 @@ Plugin Name: Final Tiles Grid Gallery Lite
 Plugin URI: http://codecanyon.net/item/final-tiles-gallery-for-wordpress/5189351?ref=GreenTreeLabs
 Description: Wordpress Plugin for creating responsive image galleries. By: Green Tree Labs
 Author: Green Tree Labs
-Version: 2.0.4
+Version: 2.0.5
 Author URI: http://codecanyon.net/user/GreenTreeLabs
 */
 
-define("FTGVERSION", "2.0.4");
+define("FTGVERSION", "2.0.5");
 define("PRO_CALL", "<span class='procall'>(<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>available with PRO version</a>)</span>");
 define("PRO_UNLOCK", "<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>Add unlimited images with PRO version</a>");
 
@@ -468,7 +468,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		}
 
 		public function refresh_gallery()
-		{
+		{		
 			if($_POST['source'] == 'images')
 				$this->list_images();
 			if($_POST['source'] == 'posts')
@@ -484,7 +484,6 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			if(check_admin_referer('FinalTiles_gallery','FinalTiles_gallery'))
 			{
 				$result = false;
-
                 
 				    $type = $_POST['type'];
 				    $imageUrl = stripslashes($_POST['img_url']);
@@ -530,9 +529,28 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		public function list_images()
 		{
 			if(check_admin_referer('FinalTiles_gallery','FinalTiles_gallery'))
-			{
+			{  
+
 				$gid = intval($_POST["gid"]);
 				$imageResults = $this->FinalTilesdb->getImagesByGalleryId($gid);
+				
+				$list_size = "medium";
+				$column_size = "s2 m2";
+				
+				if(isset($_POST['list_size']) && !empty($_POST['list_size']))
+				{				
+					$list_size = $_POST['list_size'];
+				}
+
+				setcookie('ftg_imglist_size', $list_size);
+				$_COOKIE['ftg_imglist_size'] = $list_size;
+
+				if($list_size == 'small')
+					$column_size = 's1 m1';
+				if($list_size == 'medium')
+					$column_size = 's2 m2';
+				if($list_size == 'big')
+					$column_size = 's3 m3';
 
 				include('admin/include/image-list.php');
 			}
@@ -608,6 +626,8 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			    $captionOpacity = intval($_POST['ftg_captionOpacity']);
 			    $borderSize = intval($_POST['ftg_borderSize']);
 			    $borderColor = $_POST['ftg_borderColor'];
+			    $loadingBarColor=$_POST['ftg_loadingBarColor'];
+			    $loadingBarBackgroundColor=$_POST['ftg_loadingBarBackgroundColor'];
 			    $borderRadius = intval($_POST['ftg_borderRadius']);
 			    $shadowColor = $_POST['ftg_shadowColor'];
 			    $shadowSize = intval($_POST['ftg_shadowSize']);
@@ -635,6 +655,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'enablePinterest' => $enablePinterest,
 			                  'imagesOrder' => $imagesOrder,
 			                  'compressHTML' => $this->checkboxVal('ftg_compressHTML'),
+			                  'sequentialImageLoading' =>$this->checkboxVal('ftg_sequentialImageLoading'),
 			                  'socialIconColor' => $_POST['ftg_socialIconColor'],
 			                  'recentPostsCaption' => $_POST['ftg_recentPostsCaption'],
 			                  'recentPostsCaptionAutoExcerptLength' => intval($_POST['ftg_recentPostsCaptionAutoExcerptLength']),
@@ -662,6 +683,8 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'wp_field_caption' => $wp_field_caption,
 			                  'borderSize' => $borderSize,
 			                  'borderColor' => $borderColor,
+			                  'loadingBarColor'=>$loadingBarColor,
+			                  'loadingBarBackgroundColor'=>$loadingBarBackgroundColor,
 			                  'enlargeImages' => $enlargeImages,
 			                  'backgroundColor' => $backgroundColor,
 			                  'borderRadius' => $borderRadius,
@@ -807,7 +830,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "margin" => array(
 	                    "name" => "Margin",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Margin between images",
 	                    "mu" => "px",
 	                    "min" => 0,
@@ -874,7 +897,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "minTileWidth" => array(
 	                    "name" => "Tile minimum width",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Minimum width of each tile, <strong>multiply this value for the image size factor to get the real size</strong>.",
 	                    "mu" => "px",
 	                    "min" => 50,
@@ -902,7 +925,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "gridCellSize" => array(
 	                    "name" => "Size of the grid",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "default" => 25,
 	                    "min" => 1,
 	                    "max" => 100,
@@ -934,6 +957,13 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                    "description" => "Enable or disable HTML compression, some themes prefer uncompressed, switch it off in case of problems.",
 	                    "default" => "T",
 	                    "excludeFrom" => array()
+	                ),
+	                "sequentialImageLoading"=>array(
+	                	"name"=>"Sequential image loading",
+	                	"type"=>"toggle",
+	                	"description"=>"Load images sequentially for higher performances. N.B.: search engines won't index your images if sequential loading is activated.",
+	                	"default"=>"T",
+	                	"excludeFrom"=>array()
 	                ),
 	            )
             ),
@@ -1069,7 +1099,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "captionIconSize" => array(
 	                	"name" => "Caption icon size",
-	                	"type" => "text",
+	                	"type" => "number",
 	                	"description" => "Size of the icon in captions.",
 	                	"default" => 12,
 	                	"min" => 10,
@@ -1077,9 +1107,9 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                	"mu" => "px",
 	                	"excludeFrom" => array()
 	                ),
-	                "captionFontSize" => array(
+	                 "captionFontSize" => array(
 	                	"name" => "Caption font size",
-	                	"type" => "text",
+	                	"type" => "number",
 	                	"description" => "Size of the font in captions.",
 	                	"default" => 12,
 	                	"min" => 10,
@@ -1195,7 +1225,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
             	"fields" => array(
 	                "borderSize" => array(
 	                    "name" => "Border size",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Size of the border of each image.",
 	                    "default" => 0,
 	                    "min" => 0,
@@ -1205,7 +1235,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                ),
 	                "borderRadius" => array(
 	                    "name" => "Border radius",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Border radius of the images.",
 	                    "default" => 0,
 	                    "min" => 0,
@@ -1220,9 +1250,23 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	                    "default" => "#000000",
 	                    "excludeFrom" => array()
 	                ),
+	                "loadingBarColor"=>array(
+	                    "name" => "Loading Bar color",
+	                    "type" => "color",
+	                    "description" => "Color of the loading bar",
+	                    "default" => "#000000",
+	                    "excludeFrom" => array()
+	                ),
+	                "loadingBarBackgroundColor"=>array(
+	                    "name" => "Loading Bar background color",
+	                    "type" => "color",
+	                    "description" => "Background color of the loading bar",
+	                    "default" => "#cccccc",
+	                    "excludeFrom" => array()
+	                ),
 	                "shadowSize" => array(
 	                    "name" => "Shadow size",
-	                    "type" => "text",
+	                    "type" => "number",
 	                    "description" => "Shadow size of the images.",
 	                    "default" => 0,
 	                    "min" => 0,

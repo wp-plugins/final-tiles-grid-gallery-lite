@@ -500,3 +500,87 @@
 .cf {
   *zoom: 1;
 }
+
+.li
+{
+  cursor:pointer;
+  font-size:16px;
+  display:inline;
+  float:left;
+  margin-left:7px;
+}
+
+.listview
+{
+  font-size:16px;
+  display:inline;
+  float:left;
+  margin-left:7px;
+}
+
+.menu_activ
+{
+  cursor: pointer;
+  font-size:16px;
+  display:inline;
+  float:left;
+  margin-left:7px;
+  color:red;
+}
+/*.hide
+{
+  display:none;
+}
+.padd
+{
+  padding:2px;
+}*/
+
+#image-list .small .card-title
+{
+  display: none;
+}
+
+ #image-list .small .card-content
+ {
+    display: none;
+ }
+
+#image-list .small .card-action
+{
+  background-color:#402723;
+  padding:5px;
+  text-align: center;
+}
+
+
+#image-list .medium .card-action i
+{
+  text-align: center;
+  display: none;
+}
+
+#image-list .big .card-action i
+{
+  text-align: center;
+  
+  display: none;
+}
+
+
+#image-list .small .card-action  a span
+{
+  display:none;
+}
+#image-list .small .card-action .remove span
+{
+  display: none;
+}
+
+{
+  display:none;
+}
+#image-list .small .card-action  a i
+{
+  color:white;
+}

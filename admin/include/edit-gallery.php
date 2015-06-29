@@ -1,4 +1,5 @@
 <?php
+	
 function ftg_p($gallery, $field, $default = NULL)
 {
 	global $ftg_options;
@@ -151,13 +152,17 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 								<p class="range-field">
 							      <input name="ftg_<?php print $f ?>" value="<?php ftg_p($gallery, $f, $data["default"]) ?>" type="range" min="<?php print $data["min"] ?>" max="<?php print $data["max"] ?>" />
 							    </p>
-							</div>
-							
+							</div>							
+
 
 						<?php elseif($data["type"] == "color") : ?>
 							<div class="text">
 							<input type="text" size="6" data-default-color="<?php print $data["default"] ?>" name="ftg_<?php print $f ?>" value="<?php ftg_p($gallery, $f, $data["default"])  ?>" class='pickColor' />							</div>
 
+						<?php elseif($data["type"] == "number") : ?>
+							<div class="text">
+								<input type="text" name="ftg_<?php print $f ?>" class="integer-only"  value="<?php ftg_p($gallery, $f, $data["default"]) ?>"  >	
+							</div>
 						<?php elseif($data["type"] == "PRO_FEATURE") : ?>
 
 							<div class="pro-cell">
@@ -243,6 +248,16 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 							<a class="btn grey lighten-1 waves-effect waves-light" onclick="alert('Filters are available with PRO version')" data-action="filter">Assign filters</a>
 							<a class="btn deep-orange darken-1 waves-effect waves-light" href="#" data-action="remove">Remove</a>
 						</div>
+
+						<div>
+							<b class="listview"> List View: </b>
+							<ul class="list-view-control">
+								<li data-size="big" id="listview-big" class="li"> Big </li>
+								<li data-size="medium" id="listview-medium" class="li" > Medium </li>
+								<li data-size="small" id="listview-small" class="li"> Small </li>
+							</ul>
+						</div>
+
 						<div class="panel">
 							<strong></strong>
 							<p class="text"></p>

@@ -17,8 +17,8 @@ function get_image_size_links($id) {
 	ksort($result);
     return $result;
 }
-
-?>                
+?>       
+		
 			<?php foreach($imageResults as $image) { 
                 $sizes = get_image_size_links($image->imageId);
                 $thumb = "";
@@ -27,10 +27,9 @@ function get_image_size_links($id) {
                 else
                     $thumb = plugins_url('../images/video.jpg', __FILE__);
             ?>
-			
-			<div class="col s2 m2">			
+            <div class="col <?php print $list_size ." ". $column_size ?>">
 	            <div class='item card' data-type='<?php _e($image->type) ?>' data-image-id="<?php _e($image->imageId) ?>" data-id="<?php _e($image->Id) ?>">	                
-	                <div class="figure card-image">
+	                <div class="figure card-image">	                
 		                <?php if($image->type == 'image') : ?>
 	                    <img class="thumb" src="<?php _e($thumb) ?>" />
 	                    <?php else : ?>
@@ -40,25 +39,13 @@ function get_image_size_links($id) {
 	                    <?php endif ?>
 	                    
 	                    <?php if(in_array($image->imagePath, $sizes)) : ?>
+
 	                    <span class='card-title'><?php print array_search($image->imagePath, $sizes) ?></span>
 	                    <?php endif ?>
-	                    <?php 
-	                    if(! empty($image->filters))
-	                    {
-		                	print "<ul class='filters'>";
-		                	
-		                	foreach(explode('|', $image->filters) as $f)
-		                	{
-			                	print "<li>$f</li>";
-		                	}
-		                		
-		                	print "<ul>";
-	                    }
-	                    
-	                    ?>
 	                </div>
 	                <div class="card-content">
 		                <p class="truncate">
+
 			                <?php _e(htmlentities($image->description)) ?>
 		                </p>
 	                
@@ -81,11 +68,21 @@ function get_image_size_links($id) {
 	                    <pre class="hidden description"><?php _e($image->description) ?></pre>
 	                    <pre class="hidden imagepath"><?php _e(htmlentities($image->imagePath)) ?></pre>
 	                </div>
-	                <div class="card-action">		              
-					  <a href="#image-panel-model" class="edit modal-trigger">Edit</a>
+
+	                <div class="card-action">	                              
+					  <a href="#image-panel-model" class="edit modal-trigger">
+					  	<i class="mdi-editor-mode-edit"> </i> 
+					 	<span>Edit</span>					  	
+					  </a>
+
 					  <?php if($image->source == "gallery") : ?>
-		              <a href="#" class="remove">Remove</a>
+		              <a href="#" class="remove"> 
+		              	<span> Remove </span>
+		              	<i class="mdi-action-delete"> </i>
+
+		              </a>
 		              <?php endif ?>
+
 		            </div>
 	            </div>
 			</div>
