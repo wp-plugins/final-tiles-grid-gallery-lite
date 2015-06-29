@@ -4,11 +4,11 @@ Plugin Name: Final Tiles Grid Gallery Lite
 Plugin URI: http://codecanyon.net/item/final-tiles-gallery-for-wordpress/5189351?ref=GreenTreeLabs
 Description: Wordpress Plugin for creating responsive image galleries. By: Green Tree Labs
 Author: Green Tree Labs
-Version: 2.0.4
+Version: 2.0.5
 Author URI: http://codecanyon.net/user/GreenTreeLabs
 */
 
-define("FTGVERSION", "2.0.4");
+define("FTGVERSION", "2.0.5");
 define("PRO_CALL", "<span class='procall'>(<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>available with PRO version</a>)</span>");
 define("PRO_UNLOCK", "<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>Add unlimited images with PRO version</a>");
 
