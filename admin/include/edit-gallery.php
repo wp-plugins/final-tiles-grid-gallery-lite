@@ -96,7 +96,7 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 					
 					?>
 					<select class="browser-default jump">
-						<option>Jump to setting</option>
+						<option><?= _e('Jump to setting','final-tiles-gallery')?></option>
 					<?php foreach($jumpFields as $f => $data) : ?>					
 						<?php if(is_array($data["excludeFrom"]) && ! in_array($ftg_parent_page, $data["excludeFrom"])) : ?>
 						<option value="<?php _e($data['_code']) ?>">
@@ -196,22 +196,22 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 	<?php endforeach ?>
 	<li id="images">
 		<div class="collapsible-header white-text <?php print $colors[$idx] ?> darken-2">
-			<i class="mdi-image-collections"></i> Images
+			<i class="mdi-image-collections"></i> <?= _e('Images','final-tiles-gallery')?>
 		</div>
 		<div class="collapsible-body <?php print $colors[$idx] ?> lighten-5">
 			<div id="images" class="ftg-section form-fields">
 				<div class="actions">
-					<label>Source:</label>
+					<label><?= _e('Source:','final-tiles-gallery')?></label>
 					<input class="with-gap" checked type="radio" name="ftg_source" value="images" id="source1" />
-	                <label for="source1">Images</label>
+	                <label for="source1"><?= _e('Images','final-tiles-gallery')?></label>
 					<input class="with-gap" disabled type="radio" name="ftg_source" value="posts" id="source2" />
-	                <label for="source2">Recent posts with featured image <?php _e(PRO_CALL) ?></label>
+	                <label for="source2"><?= _e('Recent posts with featured image','final-tiles-gallery')?> <?php _e(PRO_CALL) ?></label>
 	                <input class="with-gap" disabled type="radio" name="ftg_source" value="woocommerce" id="source3" />
-	                <label for="source3">WooCommerce products <?php _e(PRO_CALL) ?></label>					
+	                <label for="source3"><?= _e('WooCommerce products','final-tiles-gallery')?> <?php _e(PRO_CALL) ?></label>					
 				</div>
 				<div class="actions source-images source-panel">
 					<div class="row">
-						<label>Image size</label>
+						<label><?= _e('Image size','final-tiles-gallery')?></label>
 					
 						<select class="current-image-size browser-default">
 							<?php
@@ -221,40 +221,40 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 							}
 							?>
 						</select>
-						 <p class="tips">Want to add more images sizes? <a href="http://www.wpbeginner.com/wp-tutorials/how-to-create-additional-image-sizes-in-wordpress/" target="_blank">Read a simple tutorial.</a></p>
+						 <p class="tips"><?= _e('Want to add more images sizes?','final-tiles-gallery')?> <a href="http://www.wpbeginner.com/wp-tutorials/how-to-create-additional-image-sizes-in-wordpress/" target="_blank"><?= _e('Read a simple tutorial.','final-tiles-gallery')?></a></p>
 						 <div class="tips">
-						<strong>About choosing a proper image size:</strong> Final Tiles Gallery doesn't scale down the images when there's enough space, it gives you the freedom to choose your favourite size for each image. So you should use images that are smaller than the container, choose the <strong>thumbnail</strong> or <strong>medium</strong> size, for example.<br>
+						<strong><?= _e('About choosing a proper image size:','final-tiles-gallery')?></strong> <?= _e("Final Tiles Gallery doesn't scale down the images when there's enough space, it gives you the freedom to choose your favourite size for each image. So you should use images that are smaller than the container, choose the",'final-tiles-gallery')?> <strong> <?= _e('thumbnail','final-tiles-gallery')?></strong> <?= _e('or','final-tiles-gallery')?> <strong><?= _e('medium','final-tiles-gallery')?></strong> <?= _e('size, for example.','final-tiles-gallery')?><br>
 						<br>
-						How to get a better grid? Watch the <a href="https://www.youtube.com/watch?v=RNT4JGjtyrs" target="_blank">video tutorial</a>.
+						<?= _e('How to get a better grid? Watch the','final-tiles-gallery')?> <a href="https://www.youtube.com/watch?v=RNT4JGjtyrs" target="_blank"><?= _e('video tutorial','final-tiles-gallery')?></a>.
 					</div>
 					</div>
 					<div class="row">
-						<a href="#" class="open-media-panel waves-effect waves-light btn action"><i class="mdi-image-photo"></i> Add images</a>
+						<a href="#" class="open-media-panel waves-effect waves-light btn action"><i class="mdi-image-photo"></i> <?= _e('Add images','final-tiles-gallery')?></a>
 						<a onclick="alert('Video are available with PRO version')" class="waves-effect waves-light btn action grey lighten-1"><i class="mdi-av-videocam"></i> Add video</a>
 					</div>
 					<div class="row">
-						<p class="tips">For multiple selections: Click+CTRL.
-						Drag images to change order.</p>
+						<p class="tips"><?= _e('For multiple selections: Click+CTRL.','final-tiles-gallery')?>
+						<?= _e('Drag images to change order.','final-tiles-gallery')?></p>
 					</div>
 				</div>											
 			</div>
 			<div class="actions">
 					<div class="bulk row">
-						<label>Bulk Actions</label>
+						<label><?= _e('Bulk Actions','final-tiles-gallery')?></label>
 						<div class="options">
-							<a class="btn blue darken-4 waves-effect waves-light" href="#" data-action="select">Select all</a>
-							<a class="btn indigo darken-4 waves-effect waves-light" href="#" data-action="deselect">Deselect all</a>
-							<a class="btn lime darken-2 waves-effect waves-light" href="#" data-action="toggle">Toggle selection</a>							
-							<a class="btn grey lighten-1 waves-effect waves-light" onclick="alert('Filters are available with PRO version')" data-action="filter">Assign filters</a>
-							<a class="btn deep-orange darken-1 waves-effect waves-light" href="#" data-action="remove">Remove</a>
+							<a class="btn blue darken-4 waves-effect waves-light" href="#" data-action="select"><?= _e('Select all','final-tiles-gallery')?></a>
+							<a class="btn indigo darken-4 waves-effect waves-light" href="#" data-action="deselect"><?= _e('Deselect all','final-tiles-gallery')?></a>
+							<a class="btn lime darken-2 waves-effect waves-light" href="#" data-action="toggle"><?= _e('Toggle selection','final-tiles-gallery')?></a>							
+							<a class="btn grey lighten-1 waves-effect waves-light" onclick="alert('Filters are available with PRO version')" data-action="filter"><?= _e('Assign filters','final-tiles-gallery')?></a>
+							<a class="btn deep-orange darken-1 waves-effect waves-light" href="#" data-action="remove"> <?= _e('Remove','final-tiles-gallery')?></a>
 						</div>
 
 						<div>
-							<b class="listview"> List View: </b>
+							<b class="listview"> <? _e('List View:','final-tiles-gallery')?> </b>
 							<ul class="list-view-control">
-								<li data-size="big" id="listview-big" class="li"> Big </li>
-								<li data-size="medium" id="listview-medium" class="li" > Medium </li>
-								<li data-size="small" id="listview-small" class="li"> Small </li>
+								<li data-size="big" id="listview-big" class="li"> <?= _e('Big','final-tiles-gallery')?> </li>
+								<li data-size="medium" id="listview-medium" class="li" > <?= _e('Medium','final-tiles-gallery')?> </li>
+								<li data-size="small" id="listview-small" class="li"> <?= _e('Small','final-tiles-gallery')?> </li>
 							</ul>
 						</div>
 
@@ -262,8 +262,8 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 							<strong></strong>
 							<p class="text"></p>
 							<p class="buttons">
-								<a class="btn orange cancel" href="#">Cancel</a>
-								<a class="btn green proceed" href="#">Proceed</a>
+								<a class="btn orange cancel" href="#"><?= _e('Cancel','final-tiles-gallery')?></a>
+								<a class="btn green proceed" href="#"><?= _e('Proceed','final-tiles-gallery')?></a>
 							</p>
 						</div>
 					</div>
@@ -292,29 +292,29 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 <!-- image panel -->
 <div id="image-panel-model"	 class="modal">
 	<div class="modal-content cf">
-		<h4>Edit image</h4>
+		<h4><?= _e('Edit image','final-tiles-gallery')?></h4>
 		<div class="left">
 			<div class="figure"></div>
 			<div class="field sizes"></div>
 		</div>
 		<div class="right-side">
 			<div class="field">
-				<label>Caption</label>
+				<label><?= _e('Caption','final-tiles-gallery')?></label>
 				<div class="text">
 					<textarea name="description"></textarea>
 				</div>
 			</div>
 			<div class="field">
-				<label>Link</label>
+				<label><?= _e('Link','final-tiles-gallery')?></label>
 				<div class="text dark">
 					<input type="text" size="20" value="" name="link" />					
 				</div>
-				<label>Link target</label>
+				<label><?= _e('Link target','final-tiles-gallery')?></label>
 				<div class="text">
 					<select name="target" class="browser-default">
-						<option value="default">Default target</option>
-						<option value="_self">Open in same page</option>
-						<option value="_blank">Open in _blank</option>
+						<option value="default"><?= _e('Default target','final-tiles-gallery')?></option>
+						<option value="_self"><?= _e('Open in same page','final-tiles-gallery')?></option>
+						<option value="_blank"><?= _e('Open in _blank','final-tiles-gallery')?></option>
 					</select>
 				</div>			
 			</div>
@@ -322,8 +322,8 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 		</div>
 	</div>	
 	<div class="field buttons modal-footer">
-		<a href="#" data-action="save" class="action modal-action modal-close waves-effect waves-green btn-flat"><i class="fa fa-save"></i> Save</a>
-		<a href="#" data-action="cancel" class="action modal-action modal-close waves-effect waves-yellow btn-flat"><i class="mdi-content-reply"></i> Cancel</a>
+		<a href="#" data-action="save" class="action modal-action modal-close waves-effect waves-green btn-flat"><i class="fa fa-save"></i> <?= _e('Save','final-tiles-gallery')?></a>
+		<a href="#" data-action="cancel" class="action modal-action modal-close waves-effect waves-yellow btn-flat"><i class="mdi-content-reply"></i><?= _e('Cancel','final-tiles-gallery')?></a>
 	</div>
 </div>
 

@@ -1,5 +1,5 @@
 <?php
-	if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
+	if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die(_e('You are not allowed to call this page directly.','final-tiles-gallery')); }
 	
 	$galleryResults = $this->FinalTilesdb->getGalleries();
 	$default_options = get_option('FinalTiles_gallery_options');
@@ -26,7 +26,7 @@
 				<a target="_blank" href="http://issuu.com/greentreelabs/docs/finaltilesgridgallery-documentation?e=17859916/13243836">Documentation</a> <a target="_blank" href="http://final-tiles-gallery.com/FinalTilesGridGallery-documentation.pdf">(download)</a>
 			</li>
 			<li>
-				<a target="_blank" href="https://www.youtube.com/watch?v=RNT4JGjtyrs">Video tutorial: Tutorial: better grids with Final Tiles Grid Gallery for WordPress</a>
+				<a target="_blank" href="https://www.youtube.com/watch?v=RNT4JGjtyrs"><?= _e('Video tutorial: Tutorial: better grids with Final Tiles Grid Gallery for WordPress','final-tiles-gallery')?></a>
 			</li>						
 		</ul>
 	</header>

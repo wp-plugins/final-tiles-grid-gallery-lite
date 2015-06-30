@@ -1,6 +1,6 @@
-<?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
+<?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die(_e('You are not allowed to call this page directly.','final-tiles-gallery')); } ?>
 
-<?php $ftg_subtitle = "Dashboard" ?>    
+<?php $ftg_subtitle = _e("Dashboard",'final-tiles-gallery'); ?>    
 <?php include "header.php" ?>
 
 <?php
@@ -13,9 +13,9 @@
 
 <div class="bd">
 	<?php if(count($galleries) == 0) : ?>
-		<h5 class="cyan-text text-darken-3">Welcome to Final Tiles Grid Gallery!</h5>
+		<h5 class="cyan-text text-darken-3"> <?= _e('Welcome to Final Tiles Grid Gallery!','final-tiles-gallery')?></h5>
 		<p>
-			Create your first awesome gallery, click <a href="?page=ftg-add-gallery">here</a>.
+			<?= _e('Create your first awesome gallery, click','final-tiles-gallery') ?> <a href="?page=ftg-add-gallery"><?= _e('here','final-tiles-gallery')?></a>.
 		</p>
 	<?php else : ?>
 	<div id="gallery-list" class="row">
@@ -73,23 +73,23 @@
 <!-- Delete gallery modal -->
 <div id="delete-gallery-modal" class="modal">
 	<div class="modal-content">
-	  <h4>Confirmation</h4>
-	  <p>Do you really want to delete the gallery <span></span> ?</p>
+	  <h4><?= _e('Confirmation','final-tiles-gallery') ?></h4>
+	  <p><?= _e('Do you really want to delete the gallery','final-tiles-gallery')?> <span></span> ?</p>
 	</div>
 	<div class="modal-footer">
-	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat yes">Yes</a>
-	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat yes"><?= _e('Yes','final-tiles-gallery')?></a>
+	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat"><?= _e('No','final-tiles-gallery')?></a>
 	</div>
 </div>
 <!-- Shortcode gallery modal -->
 <div id="shortcode-gallery-modal" class="modal">
 	<div class="modal-content">
 	  <h4></h4>
-	  <p>Copy and paste the following shortcode inside a post, page or widget:</p>
+	  <p> <?= _e('Copy and paste the following shortcode inside a post, page or widget:','final-tiles-gallery')?></p>
 	  <code></code>
 	</div>
 	<div class="modal-footer">
-	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+	  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat"><?= _e('Close','final-tiles-gallery')?></a>
 	</div>
 </div>
 

@@ -120,7 +120,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		public function create_textdomain()
 		{
 			$plugin_dir = basename(dirname(__FILE__));
-			load_plugin_textdomain( 'FinalTiles-gallery', false, $plugin_dir.'/lib/languages' );
+			load_plugin_textdomain( 'final-tiles-gallery', false, $plugin_dir.'/lib/languages' );
 		}
 
 		//Define constants

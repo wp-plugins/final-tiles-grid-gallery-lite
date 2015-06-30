@@ -1,13 +1,13 @@
-<?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
+<?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die(_e('You are not allowed to call this page directly.','final-tiles-gallery')); } ?>
     
-<?php $ftg_subtitle = "New gallery" ?>    
+<?php $ftg_subtitle = _e("New gallery",'final-tiles-gallery'); ?>    
 <?php include "header.php" ?>
 
 
 <div class="bd">
 	
 	<div id="ftg-wizard">
-	    <h2>Add new gallery wizard</h2>
+	    <h2><?= _e('Add new gallery wizard','final-tiles-gallery') ?></h2>
 	
 	    <form action="#" method="post">
 	        <?php wp_nonce_field( 'add_new_gallery','ftg' ); ?>
@@ -18,47 +18,47 @@
 	            <div class="row">
 	                <div class="input-field">
 	                    <input name="ftg_name" id="name" type="text" class="validate" required="required">
-	                    <label for="name">Name of the gallery</label>
+	                    <label for="name"><?= _e('Name of the gallery','final-tiles-gallery')?></label>
 	                </div>
 	            </div>
 	            <div class="input-field">
 	                <textarea name="ftg_description" class="materialize-textarea" id="description"></textarea>
-	                <label for="description">Description of the gallery</label>
+	                <label for="description"><?= _e('Description of the gallery','final-tiles-gallery')?></label>
 	            </div>
 	        </fieldset>
 	        <fieldset data-step="2">
-	            <h5>Choose the source of the images</h5>
+	            <h5> <?= _e('Choose the source of the images','final-tiles-gallery') ?></h5>
 	            <p>
 	                <input class="with-gap" type="radio" checked="checked" name="ftg_source" id="source1" value="images" />
-	                <label for="source1">Media library</label>
+	                <label for="source1"><?= _e('Media library','final-tiles-gallery')?></label>
 	            </p>
 	            <p>
 	                <input class="with-gap" disabled type="radio" name="ftg_source" value="posts" id="source2" />
-	                <label for="source2">Recent posts with featured image <?php _e(PRO_CALL) ?></label>
+	                <label for="source2"><?= _e('Recent posts with featured image','final-tiles-gallery')?> <?php _e(PRO_CALL) ?></label>
 	            </p>
 	            <p>
 	                <input class="with-gap" disabled type="radio" name="ftg_source" value="woocommerce" id="source3" />
-	                <label for="source3">WooCommerce products <?php _e(PRO_CALL) ?></label>
+	                <label for="source3"><?= _e('WooCommerce products','final-tiles-gallery')?> <?php _e(PRO_CALL) ?></label>
 	            </p>
 	        </fieldset>
 	        <fieldset data-step="3" data-branch="images">
 	            <div class="field">
-	                <h5>WordPress field for captions:</h5>
+	                <h5> <?= _e('WordPress field for captions:','final-tiles-gallery')?></h5>
 	                <p>
 	                    <input class="with-gap" type="radio" name="ftg_wp_field_caption" value="none" id="caption1" />
-	                    <label for="caption1">Don't use captions</label>
+	                    <label for="caption1"><?= _e("Don't use captions",'final-tiles-gallery')?></label>
 	                </p>
 	                <p>
 	                    <input class="with-gap" type="radio" name="ftg_wp_field_caption" value="title" checked="checked" id="caption2" />
-	                    <label for="caption2">Title</label>
+	                    <label for="caption2"><?= _e('Title','final-tiles-gallery') ?></label>
 	                </p>
 	                <p>
 	                    <input class="with-gap" type="radio" name="ftg_wp_field_caption" value="caption" id="caption3" />
-	                    <label for="caption3">Caption</label>
+	                    <label for="caption3"><?= _e('Caption','final-tiles-gallery')?></label>
 	                </p>
 	                <p>
 	                    <input class="with-gap" type="radio" name="ftg_wp_field_caption" value="description" id="caption4" />
-	                    <label for="caption4">Description</label>
+	                    <label for="caption4"><?= _e('Description','final-tiles-gallery')?></label>
 	                </p>
 	            </div>
 	            <!--
@@ -79,21 +79,21 @@
 	                </div>
 	                -->
 	            <div class="field">
-	                <h5>Caption effect:</h5>
+	                <h5><?= _e('Caption effect:','final-tiles-gallery')?></h5>
 	                <select name="ftg_captionEffect">
-	                    <option value="fade">Fade</option>
-	                    <option value="slide-top">Slide from top</option>
-	                    <option value="slide-bottom">Slide from bottom</option>
-	                    <option value="slide-left">Slide from left</option>
-	                    <option value="slide-right">Slide from right</option>
-	                    <option value="rotate-left">Rotate from left</option>
-	                    <option value="rotate-right">Rotate from right</option>
+	                    <option value="fade"><?= _e('Fade','final-tiles-gallery')?></option>
+	                    <option value="slide-top"><?= _e('Slide from top','final-tiles-gallery')?></option>
+	                    <option value="slide-bottom"><?= _e('Slide from bottom','final-tiles-gallery')?></option>
+	                    <option value="slide-left"><?= _e('Slide from left','final-tiles-gallery')?></option>
+	                    <option value="slide-right"><?= _e('Slide from right','final-tiles-gallery')?></option>
+	                    <option value="rotate-left"><?= _e('Rotate from left','final-tiles-gallery')?></option>
+	                    <option value="rotate-right"><?= _e('Rotate from right','final-tiles-gallery')?></option>
 	                </select>
 	            </div>
 	        </fieldset>	        
 	        <fieldset data-step="4" data-save="true">
 	            <div class="field">
-	                <h5>Choose a default image size</h5>
+	                <h5><?= _e('Choose a default image size','final-tiles-gallery')?></h5>
 	                <select name="def_imgsize">
 	                <?php
 	                    foreach ($this->list_thumbnail_sizes() as $size => $atts)
@@ -102,13 +102,13 @@
 	                    }
 	                    ?>
 	                </select>
-	                <label>You can customize each image later</label>
+	                <label><?= _e('You can customize each image later','final-tiles-gallery')?></label>
 	            </div>
 	            <div class="field select-images">
 	                <a class="waves-effect waves-light btn add-images">
-	                    <i class="mdi-content-add-circle-outline left"></i> Add max 20 images</a>
+	                    <i class="mdi-content-add-circle-outline left"></i> <?= _e('Add max 20 images','final-tiles-gallery')?></a>
 	                <br>
-	                <label>You can add images now or later.</label>
+	                <label><?= _e('You can add images now or later.','final-tiles-gallery')?></label>
 	                <label><?php _e(PRO_UNLOCK) ?></label>
 	                <div class="images list-group"></div>
 	            </div>
@@ -117,30 +117,30 @@
 	            <div class="progress loading">
 	                <div class="indeterminate"></div>
 	            </div>
-	            <a class="waves-effect waves-yellow btn-flat prev">Previous</a>
-	            <a class="waves-effect waves-green btn-flat next">Next</a>
+	            <a class="waves-effect waves-yellow btn-flat prev"> <?= _e('Previous','final-tiles-gallery')?></a>
+	            <a class="waves-effect waves-green btn-flat next"><?= _e('Next','final-tiles-gallery')?></a>
 	        </footer>
 	    </form>
 	    <div id="success" class="modal">
 		    <div class="modal-content">
-		      <h4>Success!</h4>
-		      <p>Your gallery "<span class="gallery-name"></span>" has been created. Copy the following shortcode:<br>
+		      <h4><?= _e('Success!','final-tiles-gallery')?></h4>
+		      <p><?= _e('Your gallery')?> "<span class="gallery-name"></span> <?= _e('has been created. Copy the following shortcode:','final-tiles-gallery')?><br>
 			      <code></code><br>
-			      and paste it inside a post or a page. Otherwise click <a class='customize'>here</a> to customize
-			      the gallery.
+			     <?= _e('and paste it inside a post or a page. Otherwise click','final-tiles-gallery')?> <a class='customize'><?= _e('here') ?></a> <?= _e('to customize
+			      the gallery.','final-tiles-gallery')?>
 		      </p>
 		    </div>
 		    <div class="modal-footer">
-		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action">Close</a>
+		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action"><?= _e('Close','final-tiles-gallery')?></a>
 		    </div>
 		  </div>
 		<div id="error" class="modal">
 		    <div class="modal-content">
-		      <h4>Error!</h4>
-		      <p>For some reason it was not possible to save your gallery, please contact <a href="?page=ftg-support">support</a>.</p>
+		      <h4><?= -e('Error!','final-tiles-gallery')?></h4>
+		      <p><?= _e('For some reason it was not possible to save your gallery, please contact','final-tiles-gallery')?><a href="?page=ftg-support"><?= _e('support','final-tiles-gallery')?></a>.</p>
 		    </div>
 		    <div class="modal-footer">
-		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action">Close</a>
+		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action"><?= _e('Close','final-tiles-gallery')?></a>
 		    </div>
 		  </div>
 	</div>
