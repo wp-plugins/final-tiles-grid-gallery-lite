@@ -26,7 +26,7 @@
 				<a target="_blank" href="http://issuu.com/greentreelabs/docs/finaltilesgridgallery-documentation?e=17859916/13243836">Documentation</a> <a target="_blank" href="http://final-tiles-gallery.com/FinalTilesGridGallery-documentation.pdf">(download)</a>
 			</li>
 			<li>
-				<a target="_blank" href="https://www.youtube.com/watch?v=RNT4JGjtyrs"><?= _e('Video tutorial: Tutorial: better grids with Final Tiles Grid Gallery for WordPress','final-tiles-gallery')?></a>
+				<a target="_blank" href="https://www.youtube.com/watch?v=RNT4JGjtyrs"><?php _e('Video tutorial: Tutorial: better grids with Final Tiles Grid Gallery for WordPress','final-tiles-gallery')?></a>
 			</li>						
 		</ul>
 	</header>
