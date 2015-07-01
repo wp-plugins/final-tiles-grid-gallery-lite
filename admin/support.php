@@ -1,5 +1,5 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die(_e('You are not allowed to call this page directly.','final-tiles-gallery')); } ?>
-<?php $ftg_subtitle = _e("Support",'final-tiles-gallery'); ?>
+<?php $ftg_subtitle = "Support"; ?>
 <?php include "header.php" ?>
 
 

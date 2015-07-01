@@ -1,4 +1,4 @@
-<?php $ftg_subtitle = _e("Tutorial",'final-tiles-gallery'); ?>
+<?php $ftg_subtitle = "Tutorial"; ?>
 <?php include "header.php" ?>
 
 <div class="container" id="tutorial">

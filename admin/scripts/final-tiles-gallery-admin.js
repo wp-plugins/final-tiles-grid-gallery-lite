@@ -265,7 +265,7 @@ var FTG = function($) {
             
             $(".list-view-control li").click(function () {
                 currentListSize = $(this).data('size');  
-                FTG.load_images(); 
+               FTG.load_images(); 
                 $(".list-view-control li").removeClass("menu_activ");
                 $(this).addClass("menu_activ");
 
