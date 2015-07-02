@@ -53,7 +53,7 @@ global $ftg_fields;
 //print_r($gallery);
 
 $idx = 0;
-$colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange');
+$colors = array('indigo', 'blue', 'cyan', 'teal', 'purple' , 'green', 'lime', 'deep-orange');
 ?>
 
 <?php 
@@ -249,8 +249,8 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'deep-orange'
 							<a class="btn deep-orange darken-1 waves-effect waves-light" href="#" data-action="remove"> <?php _e('Remove','final-tiles-gallery')?></a>
 						</div>
 
-						<div>
-							<b class="listview"> <? _e('List View:','final-tiles-gallery')?> </b>
+						<div class="row">
+							<b class="listview"><?php _e('List View:','final-tiles-gallery')?> </b>
 							<ul class="list-view-control">
 								<li data-size="big" id="listview-big" class="li"> <?php _e('Big','final-tiles-gallery')?> </li>
 								<li data-size="medium" id="listview-medium" class="li" > <?php _e('Medium','final-tiles-gallery')?> </li>

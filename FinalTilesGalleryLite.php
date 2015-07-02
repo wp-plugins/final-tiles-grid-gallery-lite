@@ -224,7 +224,12 @@ if (!class_exists("FinalTiles_GalleryLite"))
                 'source' => 'images',
                 'delay' => 0,
 				'socialIconColor' => '#ffffff',
-				'support' => 'F'
+				'support' => 'F',
+				'loadedScale' => 100,
+				'loadedRotate' => 0,
+				'loadedHSlide' => 0,
+				'loadedVSlide' => 0
+
 			);
 
 			update_option('FinalTiles_gallery_options', $gallery_options);
@@ -636,6 +641,10 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			    $wp_field_caption = $_POST['ftg_wp_field_caption'];
 			    $style = $_POST['ftg_style'];
 			    $script = $_POST['ftg_script'];
+			    $loadedScale=intval($_POST['ftg_loadedScale']);
+			    $loadedRotate=intval($_POST['ftg_loadedRotate']);
+			    $loadedHSlide=intval($_POST['ftg_loadedHSlide']);
+			    $loadedVSlide=intval($_POST['ftg_loadedVSlide']);
 
 			    $captionEffectDuration = intval($_POST['ftg_captionEffectDuration']);
 				$id = isset($_POST['ftg_gallery_edit']) ? intval($_POST['ftg_gallery_edit']) : 0;
@@ -714,7 +723,12 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'support' => $this->checkboxVal('ftg_support'),
 			                  'supportText' => $_POST['ftg_supportText'],
 			                  'envatoReferral' => $_POST['ftg_envatoReferral'],
-			                  'scrollEffect' => $scrollEffect );
+			                  'scrollEffect' => $scrollEffect, 
+			                  'loadedScale' => $loadedScale,
+			                  'loadedRotate' => $loadedRotate,
+			                  'loadedHSlide' => $loadedHSlide,
+			                  'loadedVSlide' => $loadedVSlide
+			                 );
 
 			    header("Content-type: application/json");
 			    if($id > 0)
@@ -1220,6 +1234,52 @@ if (!class_exists("FinalTiles_GalleryLite"))
                     )
             	)
             ),
+			"Image loaded effects" => array(
+				"icon" => "mdi-editor-format-paint",
+				"fields" => array(
+					"loadedScale" => array(
+						"name" => "Scale",
+						"description" => "",
+						"type" => "slider",
+						"min" => 0,
+						"max" => 200,
+						"mu" => "%",
+						"default"=>100,
+						"excludeFrom" => array()
+					),
+					"loadedRotate" => array(
+						"name" => "Rotate",
+						"description" => "",
+						"type" => "slider",
+						"min" => -180,
+						"max" => 180,
+						"default" => 0,
+						"mu" => "deg",
+						"excludeFrom" => array()
+					),
+					"loadedHSlide" => array(
+						"name" => "Horizontal slide",
+						"description" => "",
+						"type" => "slider",
+						"min" => -100,
+						"max" => 100,
+						"mu" => "px",
+						"default" => 0,
+						"excludeFrom" => array()
+					),
+					"loadedVSlide" => array(
+						"name" => "Vertical slide",
+						"description" => "",
+						"type" => "slider",
+						"min" => -100,
+						"max" => 100,
+						"mu" => "px",
+						"default" => 0,
+						"excludeFrom" => array() 
+					)
+
+				)
+			),
             "Style" => array(
             	"icon" => "mdi-editor-format-paint",
             	"fields" => array(
