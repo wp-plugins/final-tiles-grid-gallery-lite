@@ -47,7 +47,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			add_action('wp_ajax_save_video', array($this,'save_video'));
 			add_action('wp_ajax_sort_images', array($this,'sort_images'));
 			add_action('wp_ajax_delete_image', array($this,'delete_image'));
-			add_action('wp_ajax_refresh_gallery', array($this,'redelete_imagefresh_gallery'));
+			add_action('wp_ajax_refresh_gallery', array($this,'refresh_gallery'));
 
 			add_filter( 'plugin_row_meta',array( $this, 'register_links' ),10,2);
 
