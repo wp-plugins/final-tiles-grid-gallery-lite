@@ -15,7 +15,7 @@
 	<?php if(count($galleries) == 0) : ?>
 		<h5 class="cyan-text text-darken-3"> <?php _e('Welcome to Final Tiles Grid Gallery!','final-tiles-gallery')?></h5>
 		<p>
-			<?php _e('Create your first awesome gallery, click','final-tiles-gallery') ?> <a href="?page=ftg-add-gallery"><?php _e('here','final-tiles-gallery')?></a>.
+			<?php _e('Create your first awesome gallery, click','final-tiles-gallery') ?> <a href="?page=ftg-lite-add-gallery"><?php _e('here','final-tiles-gallery')?></a>.
 		</p>
 	<?php else : ?>
 	<div id="gallery-list" class="row">
@@ -51,7 +51,7 @@
 		        <div class="card-action  <?php print $colors[$idx % count($colors)] ?> darken-4">
 			        
 					<a href="#" data-tooltip="Show shortcode" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> show-shortcode" data-gid="<?php print $gallery->Id ?>"><i class="mdi-action-settings-ethernet"></i></a>
-					<a href="?page=ftg-gallery-admin&id=<?php print $gallery->Id ?>" data-tooltip="Edit gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?>"><i class="mdi-editor-mode-edit"></i></a>
+					<a href="?page=ftg-lite-gallery-admin&id=<?php print $gallery->Id ?>" data-tooltip="Edit gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?>"><i class="mdi-editor-mode-edit"></i></a>
 		          <a data-tooltip="Clone gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> clone-gallery" data-gid="<?php print $gallery->Id ?>"><i class="mdi-content-content-copy"></i></a>
 
 		          <a data-tooltip="Delete gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> delete-gallery" data-gid="<?php print $gallery->Id ?>"><i class="mdi-action-delete"></i></a>
@@ -64,7 +64,7 @@
 	</div>
 	<?php endif ?>
 	<div class="fixed-action-btn" style="bottom: 15px; right: 24px;">
-    <a href="?page=ftg-add-gallery" class="btn-floating btn-large red">
+    <a href="?page=ftg-lite-add-gallery" class="btn-floating btn-large red">
       <i class="large mdi-content-add"></i>
     </a>
   </div>

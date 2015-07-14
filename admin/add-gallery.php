@@ -131,7 +131,7 @@
 		      </p>
 		    </div>
 		    <div class="modal-footer">
-		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action"><?php _e('Close','final-tiles-gallery')?></a>
+		      <a href="?page=ftg-lite-gallery-admin" class="waves-effect waves-green btn-flat modal-action"><?php _e('Close','final-tiles-gallery')?></a>
 		    </div>
 		  </div>
 		<div id="error" class="modal">
@@ -140,7 +140,7 @@
 		      <p><?php _e('For some reason it was not possible to save your gallery, please contact','final-tiles-gallery')?><a href="?page=ftg-support"><?php _e('support','final-tiles-gallery')?></a>.</p>
 		    </div>
 		    <div class="modal-footer">
-		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action"><?php _e('Close','final-tiles-gallery')?></a>
+		      <a href="?page=ftg-lite-gallery-admin" class="waves-effect waves-green btn-flat modal-action"><?php _e('Close','final-tiles-gallery')?></a>
 		    </div>
 		  </div>
 	</div>

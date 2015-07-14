@@ -671,7 +671,7 @@ var FTGWizard = function($) {
                     $_success = $('#success');
                     $_success.find("code").text("[FinalTilesGallery id='" + id + "']");
                     $_success.find(".gallery-name").text($("[name=ftg_name]").val());
-                    $_success.find(".customize").attr("href", "?page=ftg-gallery-admin&id=" + id);
+                    $_success.find(".customize").attr("href", "?page=ftg-lite-gallery-admin&id=" + id);
 
                     $_success.openModal();
                 }

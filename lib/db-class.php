@@ -1,5 +1,5 @@
 <?php
-class FinalTilesDB {
+class FinalTilesLiteDB {
 	
 	private static $pInstance;
 	
@@ -8,7 +8,7 @@ class FinalTilesDB {
 	public static function getInstance() 
 	{
 		if(!self::$pInstance) {
-			self::$pInstance = new FinalTilesDB();
+			self::$pInstance = new FinalTilesLiteDB();
 		}
 		
 		return self::$pInstance;

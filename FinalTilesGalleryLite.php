@@ -47,7 +47,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			add_action('wp_ajax_save_video', array($this,'save_video'));
 			add_action('wp_ajax_sort_images', array($this,'sort_images'));
 			add_action('wp_ajax_delete_image', array($this,'delete_image'));
-			add_action('wp_ajax_refresh_gallery', array($this,'refresh_gallery'));
+			add_action('wp_ajax_refresh_gallery', array($this,'redelete_imagefresh_gallery'));
 
 			add_filter( 'plugin_row_meta',array( $this, 'register_links' ),10,2);
 
@@ -149,7 +149,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		public function create_db_conn()
 		{
 			require('lib/db-class.php');
-			$FinalTilesdb = FinalTilesDB::getInstance();
+			$FinalTilesdb = FinalTilesLiteDB::getInstance();
 			return $FinalTilesdb;
 		}
 
@@ -337,10 +337,10 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		//Create Admin Menu
 		public function add_gallery_admin_menu()
 		{
-			$overview = add_menu_page('Final Tiles Gallery', 'Final Tiles Gallery', 'edit_posts', 'ftg-gallery-admin', array($this, 'add_overview'), WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/icon.png');			
-			$add_gallery = add_submenu_page('ftg-gallery-admin', __('FinalTiles Gallery >> Add Gallery','FinalTiles-gallery'), __('Add Gallery','FinalTiles-gallery'), 'edit_posts', 'ftg-add-gallery', array($this, 'add_gallery'));
-			$tutorial = add_submenu_page('ftg-gallery-admin', __('FinalTiles Gallery >> Tutorial','FinalTiles-gallery'), __('Tutorial','FinalTiles-gallery'), 'edit_posts', 'ftg-tutorial', array($this, 'tutorial'));
-			$support = add_submenu_page('ftg-gallery-admin', __('FinalTiles Gallery >> Support','FinalTiles-gallery'), __('Support','FinalTiles-gallery'), 'edit_posts', 'ftg-support', array($this, 'support'));
+			$overview = add_menu_page('Final Tiles Gallery', 'Final Tiles Gallery', 'edit_posts', 'ftg-lite-gallery-admin', array($this, 'add_overview'), WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/icon.png');			
+			$add_gallery = add_submenu_page('ftg-lite-gallery-admin', __('FinalTiles Gallery >> Add Gallery','FinalTiles-gallery'), __('Add Gallery','FinalTiles-gallery'), 'edit_posts', 'ftg-lite-add-gallery', array($this, 'add_gallery'));
+			$tutorial = add_submenu_page('ftg-lite-gallery-admin', __('FinalTiles Gallery >> Tutorial','FinalTiles-gallery'), __('Tutorial','FinalTiles-gallery'), 'edit_posts', 'ftg-lite-tutorial', array($this, 'tutorial'));
+			$support = add_submenu_page('ftg-lite-gallery-admin', __('FinalTiles Gallery >> Support','FinalTiles-gallery'), __('Support','FinalTiles-gallery'), 'edit_posts', 'ftg-lite-support', array($this, 'support'));
 
 			add_action('admin_print_styles-'.$add_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
 			add_action('admin_print_styles-'.$edit_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
