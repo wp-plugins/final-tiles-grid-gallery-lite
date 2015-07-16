@@ -166,8 +166,7 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'purple' , 'green', 'lime', 'd
 						<?php elseif($data["type"] == "PRO_FEATURE") : ?>
 
 							<div class="pro-cell">
-								<a href="http://www.final-tiles-gallery.com/wordpress/pro.html" target="_blank">Unlock this feature with a PRO license <i class="mdi-content-send
-"></i></a>
+								<a href="http://www.final-tiles-gallery.com/wordpress/pro.html" target="_blank">Unlock this feature with a PRO license</a>
                     		</div>
 
 						<?php elseif($data["type"] == "textarea") : ?>
@@ -196,7 +195,7 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'purple' , 'green', 'lime', 'd
 	<?php endforeach ?>
 	<li id="images">
 		<div class="collapsible-header white-text <?php print $colors[$idx] ?> darken-2">
-			<i class="mdi-image-collections"></i> <?php _e('Images','final-tiles-gallery')?>
+			<i class="mdi mdi-image-filter"></i> <?php _e('Images','final-tiles-gallery')?>
 		</div>
 		<div class="collapsible-body <?php print $colors[$idx] ?> lighten-5">
 			<div id="images" class="ftg-section form-fields">
@@ -229,8 +228,8 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'purple' , 'green', 'lime', 'd
 					</div>
 					</div>
 					<div class="row">
-						<a href="#" class="open-media-panel waves-effect waves-light btn action"><i class="mdi-image-photo"></i> <?php _e('Add images','final-tiles-gallery')?></a>
-						<a onclick="alert('Video are available with PRO version')" class="waves-effect waves-light btn action grey lighten-1"><i class="mdi-av-videocam"></i> Add video</a>
+						<a href="#" class="open-media-panel waves-effect waves-light btn action"> <?php _e('Add images','final-tiles-gallery')?></a>
+						<a onclick="alert('Video are available with PRO version')" class="waves-effect waves-light btn action grey lighten-1"> Add video</a>
 					</div>
 					<div class="row">
 						<p class="tips"><?php _e('For multiple selections: Click+CTRL.','final-tiles-gallery')?>
@@ -277,14 +276,14 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'purple' , 'green', 'lime', 'd
 
 <div class="fixed-action-btn bullet-menu">
     <a class="btn-floating btn-large blue darken-1 right back-to-top">
-      <i class="large mdi-hardware-keyboard-arrow-up"></i>
+      <i class="large mdi mdi-chevron-up"></i>
     </a>
     <ul>
 	    <?php $idx = 0; ?>
 	    <?php foreach($ftg_fields as $section => $s) : ?>
 	    <li><a class="btn-floating <?php _e($colors[$idx++]) ?>" rel="<?php _e(FinalTiles_GalleryLite::slugify($section)) ?>"><i class="large <?php _e($s["icon"]) ?>"></i></a></li>
 	    <?php endforeach ?>
-	    <li><a class="btn-floating <?php _e($colors[$idx++]) ?>" rel="images"><i class="large mdi-image-collections"></i></a></li>
+	    <li><a class="btn-floating <?php _e($colors[$idx++]) ?>" rel="images"><i class="mdi mdi-image-filter"></i></a></li>
 	</ul>
 </div>
   

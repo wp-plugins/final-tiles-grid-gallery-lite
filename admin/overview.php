@@ -50,11 +50,11 @@
 		        </div>
 		        <div class="card-action  <?php print $colors[$idx % count($colors)] ?> darken-4">
 			        
-					<a href="#" data-tooltip="Show shortcode" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> show-shortcode" data-gid="<?php print $gallery->Id ?>"><i class="mdi-action-settings-ethernet"></i></a>
-					<a href="?page=ftg-lite-gallery-admin&id=<?php print $gallery->Id ?>" data-tooltip="Edit gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?>"><i class="mdi-editor-mode-edit"></i></a>
-		          <a data-tooltip="Clone gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> clone-gallery" data-gid="<?php print $gallery->Id ?>"><i class="mdi-content-content-copy"></i></a>
+					<a href="#" data-tooltip="Show shortcode" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> show-shortcode" data-gid="<?php print $gallery->Id ?>"><i class="mdi mdi-code-array"></i></a>
+					<a href="?page=ftg-lite-gallery-admin&id=<?php print $gallery->Id ?>" data-tooltip="Edit gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?>"><i class="mdi mdi-pencil"></i></a>
+		          <a data-tooltip="Clone gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> clone-gallery" data-gid="<?php print $gallery->Id ?>"><i class="mdi mdi-content-copy"></i></a>
 
-		          <a data-tooltip="Delete gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> delete-gallery" data-gid="<?php print $gallery->Id ?>"><i class="mdi-action-delete"></i></a>
+		          <a data-tooltip="Delete gallery" data-position="top" data-delay="10"  class="tooltipped waves-effect waves-<?php print $colors[$idx % count($colors)] ?> delete-gallery" data-gid="<?php print $gallery->Id ?>"><i class="mdi mdi-delete"></i></a>
 		        </div>
 			  </div>
 	      </div>
@@ -65,7 +65,7 @@
 	<?php endif ?>
 	<div class="fixed-action-btn" style="bottom: 15px; right: 24px;">
     <a href="?page=ftg-lite-add-gallery" class="btn-floating btn-large red">
-      <i class="large mdi-content-add"></i>
+      <i class="large fa fa-plus"></i>
     </a>
   </div>
 </div>

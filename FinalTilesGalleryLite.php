@@ -283,6 +283,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 
             wp_register_style('fontawesome_stylesheet', '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css');
             wp_enqueue_style('fontawesome_stylesheet');
+
 		}
 
 		//Admin Section - register scripts and styles
@@ -293,6 +294,12 @@ if (!class_exists("FinalTiles_GalleryLite"))
 				wp_enqueue_media();
 			}
 			//wp_enqueue_script( 'custom-header' );
+			wp_register_style('google-fonts', '//fonts.googleapis.com/css?family=Roboto:400,700,500,300,900');
+			wp_enqueue_style('google-fonts');
+			
+			wp_register_style('google-icons', '//cdn.materialdesignicons.com/1.1.34/css/materialdesignicons.min.css', array());
+			wp_enqueue_style('google-icons');
+
 
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-ui-dialog');
@@ -302,7 +309,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			wp_enqueue_style( 'wp-color-picker' );
 
 			wp_enqueue_script('media-upload');
-			wp_enqueue_script('thickbox');
+			wp_enqueue_script('thickbox');			
 
 			wp_register_style('final-tiles-gallery-admin', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/css/style.css', array('colors'), FTGVERSION);
 			wp_enqueue_style('final-tiles-gallery-admin');
@@ -820,7 +827,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		var $fields = array(
 
             "General" => array(
-            	"icon" => "mdi-action-settings",
+            	"icon" => "mdi mdi-settings",
             	"fields" => array(
 	                "name" => array(
 	                    "name" => "Name",
@@ -982,7 +989,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Links & Lightbox" => array(
-            	"icon" => "mdi-content-link",
+            	"icon" => "mdi mdi-link-variant",
             	"fields" => array(
 	                "lightbox" => array(
 	                    "name" => "Lightbox &amp; Links",
@@ -1038,7 +1045,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Captions" => array(
-            	"icon" => "mdi-content-text-format",
+            	"icon" => "mdi mdi-comment-text-outline",
             	"fields" => array(	                
 	                "captionBehavior" => array(
 	            	    "name" => "Caption behavior",
@@ -1203,7 +1210,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Hover effects" => array(
-            	"icon" => "mdi-image-gradient",
+            	"icon" => "mdi mdi-file-image",
             	"fields" => array(
             		"hoverZoom" => array(
             			"name" => "Zoom",
@@ -1235,7 +1242,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
             	)
             ),
 			"Image loaded effects" => array(
-				"icon" => "mdi-editor-format-paint",
+				"icon" => "mdi mdi-reload",
 				"fields" => array(
 					"loadedScale" => array(
 						"name" => "Scale",
@@ -1281,7 +1288,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 				)
 			),
             "Style" => array(
-            	"icon" => "mdi-editor-format-paint",
+            	"icon" => "mdi mdi-format-paint",
             	"fields" => array(
 	                "borderSize" => array(
 	                    "name" => "Border size",
@@ -1344,7 +1351,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Customizations" => array(
-            	"icon" => "mdi-action-extension",
+            	"icon" => "mdi mdi-puzzle",
             	"fields" => array(
                     "aClass" => array(
 	                    "name" => "Additional CSS class on A tag",
