@@ -118,13 +118,13 @@ class FinalTilesLiteDB {
 		if(empty($data->captionEmpty))
 			$data->captionEmpty = "hide";
 		if(empty($data->captionEffect))
-			$data->captionEffect = $gallery->hoverEffect;
+		//	$data->captionEffect = $gallery->hoverEffect;
 		if(empty($data->captionBackgroundColor))
 			$data->captionBackgroundColor = $gallery->hoverColor;
 		if(empty($data->captionOpacity))
 			$data->captionOpacity = $gallery->hoverOpacity;
 		if(empty($data->captionEasing))
-			$data->captionEasing = $gallery->hoverEasing;
+			//$data->captionEasing = $gallery->hoverEasing;
 		if(empty($data->captionFrame))
 			$data->captionFrame = "F";
 		if(empty($data->captionFrameColor))

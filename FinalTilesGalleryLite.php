@@ -350,12 +350,12 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			$support = add_submenu_page('ftg-lite-gallery-admin', __('FinalTiles Gallery >> Support','FinalTiles-gallery'), __('Support','FinalTiles-gallery'), 'edit_posts', 'ftg-lite-support', array($this, 'support'));
 
 			add_action('admin_print_styles-'.$add_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
-			add_action('admin_print_styles-'.$edit_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
+			// add_action('admin_print_styles-'.$edit_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
 
 			add_action('load-'.$tutorial, array($this, 'gallery_admin_init'));
 			add_action('load-'.$overview, array($this, 'gallery_admin_init'));
 			add_action('load-'.$add_gallery, array($this, 'gallery_admin_init'));
-			add_action('load-'.$edit_gallery, array($this, 'gallery_admin_init'));
+			// add_action('load-'.$edit_gallery, array($this, 'gallery_admin_init'));
 			add_action('load-'.$support, array($this, 'gallery_admin_init'));
 
 			add_action( 'admin_bar_menu', array($this, 'gallery_admin_bar'), 100);

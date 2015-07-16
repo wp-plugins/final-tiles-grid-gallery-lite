@@ -38,11 +38,11 @@
 		<?php wp_nonce_field('FinalTiles_gallery', 'FinalTiles_gallery'); ?>
 		<div class="col s12 m3">
 	      <div class="card <?php print $colors[$idx % count($colors)] ?> darken-2" id="gallery-<?php print $gallery->Id ?>">
-		      <?php if($hasImage) : ?>
+		      <?php /* if($hasImage) : ?>
 		      <div class="card-image">
 			      <img src="<?php print $previewSrc ?>" />
 		      </div>
-			  <?php endif ?>
+			  <?php //endif */ ?>
 			  <div class="data">
 		        <div class="card-content white-text">
 		          <span class="card-title"><?php print $gallery->name ?></span>

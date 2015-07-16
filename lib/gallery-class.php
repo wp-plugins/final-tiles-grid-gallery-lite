@@ -264,7 +264,8 @@ if (!class_exists("FinalTilesGallery"))
             if($gallery->captionFrame == 'T' && $gallery->captionFrameColor)
             	$html .= "#ftg-$this->id$rid .tile .caption.frame .text { border-color: ". $gallery->captionFrameColor ."; }\n";
             
-			$html .= "#ftg-$this->id$rid { transform: scale(" .$gallery->loadedScale/100 .") translate(" . $gallery->loadedHSlide . 'px,' . $gallery->loadedVSlide . "px) rotate(" . $gallery->loadedRotate .  "deg); }\n";
+			// $html .= "#ftg-$this->id$rid { transform: scale(" .$gallery->loadedScale/100 .") translate(" . $gallery->loadedHSlide . 'px,' . $gallery->loadedVSlide . "px) rotate(" . $gallery->loadedRotate .  "deg); }\n";
+			$html .= "#ftg-$this->id$rid .tile { transform: scale(" .$gallery->loadedScale/100 .") translate(" . $gallery->loadedHSlide . 'px,' . $gallery->loadedVSlide . "px) rotate(" . $gallery->loadedRotate .  "deg); }\n";
 
                 
             if($gallery->hoverZoom != 100 || $gallery->hoverRotation != 0)
