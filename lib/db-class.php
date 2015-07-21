@@ -88,6 +88,35 @@ class FinalTilesLiteDB {
 		
 		
 		// compatibility checks
+		if(empty($data->enableTwitter))
+			$data->enableTwitter = 'F';
+		if(empty($data->enableFacebook))
+			$data->enableFacebook = 'F';
+		if(empty($data->enableGplus))
+			$data->enableGplus = 'F';
+		if(empty($data->enablePinterest))
+			$data->enablePinterest = 'F';
+		if(empty($data->captionFrame))
+			$data->captionFrame = "F";
+		if(empty($data->hoverIconRotation))
+			$data->hoverIconRotation = "F";
+		if(empty($data->blank))
+			$data->blank = "F";
+		if(empty($data->aClass))
+			$data->aClass = "";
+		if(empty($data->rel))
+			$data->rel = "";
+		if(empty($data->style))
+			$data->style = "";
+		if(empty($data->script))
+			$data->script = "";
+		if(empty($data->loadingBarColor))
+			$data->loadingBarColor = "#fff";
+		if(empty($data->loadingBarBackgroundColor))
+			$data->loadingBarBackgroundColor = "#fff";
+		if(empty($data->backgroundColor))
+			$data->backgroundColor = "#fff";
+
 		if(empty($data->wp_field_caption))
 			$data->wp_field_caption = "description";
 		if(empty($data->captionBehavior))

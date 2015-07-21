@@ -650,9 +650,7 @@ var FTGWizard = function($) {
         },
         save: function() {
 
-			
             var data = $_wizard.find("form").serialize();
-
             $_wizard.find("footer a").addClass("disabled");
             $_wizard.find(".loading").show();
 

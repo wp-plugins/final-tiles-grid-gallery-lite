@@ -121,6 +121,7 @@ $colors = array('indigo', 'blue', 'cyan', 'teal', 'purple' , 'green', 'lime', 'd
 						</th>
 						<td>
 						<div class="field">
+						
 						<?php if($data["type"] == "text") : ?>
 							<div class="text">
 								<input type="text" size="30" name="ftg_<?php print $f ?>" value="<?php ftg_p($gallery, $f, $data["default"])  ?>" /> 
