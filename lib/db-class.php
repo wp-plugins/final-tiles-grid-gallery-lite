@@ -210,8 +210,8 @@ class FinalTilesLiteDB {
 
 		foreach ($images as $image) {
 			$data = array( 'gid' => $gid, 'imagePath' => $image->imagePath, 
-     					 'description' => $image->description, 
-					'imageId' => $image->imageId, 'sortOrder' => 0, 'filters' => $images->filters );
+     					 'description' => '', 
+					'imageId' => $image->imageId, 'sortOrder' => 0 );
 			$data['type'] = isset($image->type) ? $image->type : 'image';
 			
 				

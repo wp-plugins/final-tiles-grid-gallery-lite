@@ -206,7 +206,7 @@ if (!class_exists("FinalTilesGallery"))
     
             $bgCaption = $this->toRGB($gallery->captionBackgroundColor);
             
-            $html = "<!-- Final Tiles Grid Gallery for WordPress v".FTGVERSION." -->\n\n";
+            $html = "<!-- Final Tiles Grid Gallery for WordPress v".FTGLITEVERSION." -->\n\n";
             $html .= stripslashes($this->gallery->beforeGalleryText);
 
             
