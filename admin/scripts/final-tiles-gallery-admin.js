@@ -632,7 +632,7 @@ var FTGWizard = function($) {
                     $.each(images, function() {
 
                         var $_tile = $("<div class='tile list-group-item' />");
-                        $_tile.append("<a class='btn-floating waves-effect waves-light red del'><i class='mdi-content-clear'></i></a>");
+                        $_tile.append("<a class='btn-floating waves-effect waves-light red del'><i class='fa fa-times'></i></a>");
                         $_tile.append('<img src="' + this.thumbnail + '" />');
 
                         $_wizard.find(".images").append($_tile);

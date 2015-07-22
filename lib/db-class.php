@@ -88,6 +88,7 @@ class FinalTilesLiteDB {
 		
 		
 		// compatibility checks
+		
 		if(empty($data->enableTwitter))
 			$data->enableTwitter = 'F';
 		if(empty($data->enableFacebook))
@@ -116,7 +117,7 @@ class FinalTilesLiteDB {
 			$data->loadingBarBackgroundColor = "#fff";
 		if(empty($data->backgroundColor))
 			$data->backgroundColor = "#fff";
-
+		
 		if(empty($data->wp_field_caption))
 			$data->wp_field_caption = "description";
 		if(empty($data->captionBehavior))
@@ -141,6 +142,7 @@ class FinalTilesLiteDB {
 
 		if(empty($data->delay))
 			$data->delay = 0;
+
 
 		if(empty($data->captionFullHeight))
 			$data->captionFullHeight = "T";
