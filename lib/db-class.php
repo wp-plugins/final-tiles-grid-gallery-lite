@@ -22,8 +22,8 @@ class FinalTilesLiteDB {
 	public function updateConfiguration()
 	{
 		global $wpdb;
-		$query = "SELECT * FROM $wpdb->FinalTilesGalleries";
-		$galleries = $wpdb->get_results($query);
+
+		$galleries = $wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->FinalTilesGalleries", ""));
 		foreach($galleries as $gallery)
 		{
 			if($gallery->configuration == NULL)
@@ -56,8 +56,8 @@ class FinalTilesLiteDB {
 	public function deleteGallery($gid) 
 	{
 		global $wpdb;
-		$wpdb->query( "DELETE FROM $wpdb->FinalTilesImages WHERE gid = '$gid'" );
-		$wpdb->query( "DELETE FROM $wpdb->FinalTilesGalleries WHERE Id = '$gid'" );
+		$wpdb->query($wpdb->prepare("DELETE FROM $wpdb->FinalTilesImages WHERE gid = %d", $gid));
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->FinalTilesGalleries WHERE Id = %d", $gid));
 	}
 	
 	public function editGallery($gid, $data) 
@@ -76,8 +76,7 @@ class FinalTilesLiteDB {
 	public function getGalleryById($id, $array=false) 
 	{
 		global $wpdb;
-		$query = "SELECT * FROM $wpdb->FinalTilesGalleries WHERE Id = '$id'";
-		$gallery = $wpdb->get_row($query);
+		$gallery = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->FinalTilesGalleries WHERE Id = %d", $id));
 
 		if($array)
 		{
@@ -88,6 +87,7 @@ class FinalTilesLiteDB {
 		
 		
 		// compatibility checks
+		
 		
 		if(empty($data->enableTwitter))
 			$data->enableTwitter = 'F';
@@ -153,7 +153,7 @@ class FinalTilesLiteDB {
 		if(empty($data->captionBackgroundColor))
 			$data->captionBackgroundColor = $gallery->hoverColor;
 		if(empty($data->captionOpacity))
-			$data->captionOpacity = $gallery->hoverOpacity;
+			$data->captionOpacity = 80;
 		if(empty($data->captionEasing))
 			//$data->captionEasing = $gallery->hoverEasing;
 		if(empty($data->captionFrame))
@@ -206,7 +206,7 @@ class FinalTilesLiteDB {
 	{
 		global $wpdb;
 		$query = "SELECT Id, configuration FROM $wpdb->FinalTilesGalleries order by id";
-		$galleryResults = $wpdb->get_results( $query );
+		$galleryResults = $wpdb->get_results($query);
 		
 		$result = array();
 		foreach($galleryResults as $gallery)
@@ -241,7 +241,7 @@ class FinalTilesLiteDB {
 
 		foreach ($images as $image) {
 			$data = array( 'gid' => $gid, 'imagePath' => $image->imagePath, 
-     					 'description' => '', 
+     					 'description' => isset($image->description) ? $image->description : "", 
 					'imageId' => $image->imageId, 'sortOrder' => 0 );
 			$data['type'] = isset($image->type) ? $image->type : 'image';
 			
@@ -262,8 +262,7 @@ class FinalTilesLiteDB {
 	
 	public function deleteImage($id) {
 		global $wpdb;
-		$query = "DELETE FROM $wpdb->FinalTilesImages WHERE Id = '$id'";
-		if($wpdb->query($query) === FALSE) {
+		if($wpdb->query($wpdb->prepare("DELETE FROM $wpdb->FinalTilesImages WHERE Id = %d", $id)) === FALSE) {
 			return false;
 		}
 		else {
@@ -293,8 +292,7 @@ class FinalTilesLiteDB {
 	public function getImagesByGalleryId($gid) 
 	{
 		global $wpdb;
-		$query = "SELECT * FROM $wpdb->FinalTilesImages WHERE gid = $gid ORDER BY sortOrder ASC";
-		$imageResults = $wpdb->get_results( $query );
+		$imageResults = $wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->FinalTilesImages WHERE gid = %d ORDER BY sortOrder ASC", $gid) );
 
 		foreach($imageResults as &$image)
 			$image->source = "gallery";
@@ -304,8 +302,7 @@ class FinalTilesLiteDB {
 	
 	public function getGalleryByGalleryId($gid) {
 		global $wpdb;
-		$query = "SELECT $wpdb->FinalTilesGalleries.*, $wpdb->FinalTilesImages.* FROM $wpdb->FinalTilesGalleries INNER JOIN $wpdb->FinalTilesImages ON ($wpdb->FinalTilesGalleries.Id = $wpdb->FinalTilesImages.gid) WHERE $wpdb->FinalTilesGalleries.Id = '$gid' ORDER BY sortOrder ASC";			
-		$gallery = $wpdb->get_results( $query );		
+		$gallery = $wpdb->get_results( $wpdb->prepare("SELECT $wpdb->FinalTilesGalleries.*, $wpdb->FinalTilesImages.* FROM $wpdb->FinalTilesGalleries INNER JOIN $wpdb->FinalTilesImages ON ($wpdb->FinalTilesGalleries.Id = $wpdb->FinalTilesImages.gid) WHERE $wpdb->FinalTilesGalleries.Id = %d ORDER BY sortOrder ASC", $gid) );		
 		return $gallery;
 	}
 }
