@@ -71,14 +71,14 @@ function get_image_size_links($id) {
 
 	                <div class="card-action">	                              
 					  <a href="#image-panel-model" class="edit modal-trigger">
-					  	<i class="mdi-editor-mode-edit"> </i> 
+					  	<i class="mdi mdi-pencil"> </i> 
 					 	<span>Edit</span>					  	
 					  </a>
 
 					  <?php if($image->source == "gallery") : ?>
 		              <a href="#" class="remove"> 
 		              	<span> Remove </span>
-		              	<i class="mdi-action-delete"> </i>
+		              	<i class="mdi mdi-delete"> </i>
 
 		              </a>
 		              <?php endif ?>

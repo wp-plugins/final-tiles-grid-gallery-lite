@@ -265,7 +265,7 @@ var FTG = function($) {
             
             $(".list-view-control li").click(function () {
                 currentListSize = $(this).data('size');  
-                FTG.load_images(); 
+               FTG.load_images(); 
                 $(".list-view-control li").removeClass("menu_activ");
                 $(this).addClass("menu_activ");
 
@@ -632,7 +632,7 @@ var FTGWizard = function($) {
                     $.each(images, function() {
 
                         var $_tile = $("<div class='tile list-group-item' />");
-                        $_tile.append("<a class='btn-floating waves-effect waves-light red del'><i class='mdi-content-clear'></i></a>");
+                        $_tile.append("<a class='btn-floating waves-effect waves-light red del'><i class='fa fa-times'></i></a>");
                         $_tile.append('<img src="' + this.thumbnail + '" />');
 
                         $_wizard.find(".images").append($_tile);
@@ -650,9 +650,7 @@ var FTGWizard = function($) {
         },
         save: function() {
 
-			
             var data = $_wizard.find("form").serialize();
-
             $_wizard.find("footer a").addClass("disabled");
             $_wizard.find(".loading").show();
 
@@ -671,7 +669,7 @@ var FTGWizard = function($) {
                     $_success = $('#success');
                     $_success.find("code").text("[FinalTilesGallery id='" + id + "']");
                     $_success.find(".gallery-name").text($("[name=ftg_name]").val());
-                    $_success.find(".customize").attr("href", "?page=ftg-gallery-admin&id=" + id);
+                    $_success.find(".customize").attr("href", "?page=ftg-lite-gallery-admin&id=" + id);
 
                     $_success.openModal();
                 }

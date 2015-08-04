@@ -131,16 +131,16 @@
 		      </p>
 		    </div>
 		    <div class="modal-footer">
-		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action">Close</a>
+		      <a href="?page=ftg-lite-gallery-admin" class="waves-effect waves-green btn-flat modal-action">Close</a>
 		    </div>
 		  </div>
 		<div id="error" class="modal">
 		    <div class="modal-content">
 		      <h4>Error!</h4>
-		      <p>For some reason it was not possible to save your gallery, please contact <a href="?page=ftg-support">support</a>.</p>
+		      <p>For some reason it was not possible to save your gallery, please contact <a href="?page=ftg-lite-support">support</a>.</p>
 		    </div>
 		    <div class="modal-footer">
-		      <a href="?page=ftg-gallery-admin" class="waves-effect waves-green btn-flat modal-action">Close</a>
+		      <a href="?page=ftg-lite-gallery-admin" class="waves-effect waves-green btn-flat modal-action">Close</a>
 		    </div>
 		  </div>
 	</div>

@@ -4,11 +4,11 @@ Plugin Name: Final Tiles Grid Gallery Lite
 Plugin URI: http://codecanyon.net/item/final-tiles-gallery-for-wordpress/5189351?ref=GreenTreeLabs
 Description: Wordpress Plugin for creating responsive image galleries. By: Green Tree Labs
 Author: Green Tree Labs
-Version: 2.0.5
+Version: 2.0.6
 Author URI: http://codecanyon.net/user/GreenTreeLabs
 */
 
-define("FTGVERSION", "2.0.5");
+define("FTGLITEVERSION", "2.0.6");
 define("PRO_CALL", "<span class='procall'>(<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>available with PRO version</a>)</span>");
 define("PRO_UNLOCK", "<a href='http://final-tiles-gallery.com/wordpress/pro.html' target='_blank'>Add unlimited images with PRO version</a>");
 
@@ -120,7 +120,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		public function create_textdomain()
 		{
 			$plugin_dir = basename(dirname(__FILE__));
-			load_plugin_textdomain( 'FinalTiles-gallery', false, $plugin_dir.'/lib/languages' );
+			load_plugin_textdomain( 'final-tiles-gallery', false, $plugin_dir.'/lib/languages' );
 		}
 
 		//Define constants
@@ -149,7 +149,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		public function create_db_conn()
 		{
 			require('lib/db-class.php');
-			$FinalTilesdb = FinalTilesDB::getInstance();
+			$FinalTilesdb = FinalTilesLiteDB::getInstance();
 			return $FinalTilesdb;
 		}
 
@@ -224,7 +224,12 @@ if (!class_exists("FinalTiles_GalleryLite"))
                 'source' => 'images',
                 'delay' => 0,
 				'socialIconColor' => '#ffffff',
-				'support' => 'F'
+				'support' => 'F',
+				'loadedScale' => 100,
+				'loadedRotate' => 0,
+				'loadedHSlide' => 0,
+				'loadedVSlide' => 0
+
 			);
 
 			update_option('FinalTiles_gallery_options', $gallery_options);
@@ -266,11 +271,11 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		{
 			wp_enqueue_script('jquery');
 
-			wp_register_script('finalTilesGallery', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/scripts/script.js', array('jquery'), FTGVERSION);
+			wp_register_script('finalTilesGallery', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/scripts/script.js', array('jquery'), FTGLITEVERSION);
 			wp_enqueue_script('finalTilesGallery');
 
 
-			wp_register_style('finalTilesGallery_stylesheet', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/scripts/ftg.css', array(), FTGVERSION);
+			wp_register_style('finalTilesGallery_stylesheet', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/scripts/ftg.css', array(), FTGLITEVERSION);
 			wp_enqueue_style('finalTilesGallery_stylesheet');
 
 			wp_register_script('lightbox2_script', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/lightbox/lightbox2/js/script.js', array('jquery'));
@@ -278,6 +283,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 
             wp_register_style('fontawesome_stylesheet', '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css');
             wp_enqueue_style('fontawesome_stylesheet');
+
 		}
 
 		//Admin Section - register scripts and styles
@@ -288,6 +294,12 @@ if (!class_exists("FinalTiles_GalleryLite"))
 				wp_enqueue_media();
 			}
 			//wp_enqueue_script( 'custom-header' );
+			wp_register_style('google-fonts', '//fonts.googleapis.com/css?family=Roboto:400,700,500,300,900');
+			wp_enqueue_style('google-fonts');
+			
+			wp_register_style('google-icons', '//cdn.materialdesignicons.com/1.1.34/css/materialdesignicons.min.css', array());
+			wp_enqueue_style('google-icons');
+
 
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-ui-dialog');
@@ -297,15 +309,15 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			wp_enqueue_style( 'wp-color-picker' );
 
 			wp_enqueue_script('media-upload');
-			wp_enqueue_script('thickbox');
+			wp_enqueue_script('thickbox');			
 
-			wp_register_style('final-tiles-gallery-admin', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/css/style.css', array('colors'), FTGVERSION);
+			wp_register_style('final-tiles-gallery-admin', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/css/style.css', array('colors'), FTGLITEVERSION);
 			wp_enqueue_style('final-tiles-gallery-admin');
 
 			wp_register_script('materialize', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/scripts/materialize.min.js', array('jquery'));
 			wp_enqueue_script('materialize');
 
-			wp_register_script('final-tiles-gallery', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/scripts/final-tiles-gallery-admin.js', array('jquery','media-upload','thickbox', 'materialize'), FTGVERSION);
+			wp_register_script('final-tiles-gallery', WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/scripts/final-tiles-gallery-admin.js', array('jquery','media-upload','thickbox', 'materialize'), FTGLITEVERSION);
 			wp_enqueue_script('final-tiles-gallery');
 
 			wp_enqueue_style('thickbox');
@@ -332,18 +344,18 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		//Create Admin Menu
 		public function add_gallery_admin_menu()
 		{
-			$overview = add_menu_page('Final Tiles Gallery', 'Final Tiles Gallery', 'edit_posts', 'ftg-gallery-admin', array($this, 'add_overview'), WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/icon.png');			
-			$add_gallery = add_submenu_page('ftg-gallery-admin', __('FinalTiles Gallery >> Add Gallery','FinalTiles-gallery'), __('Add Gallery','FinalTiles-gallery'), 'edit_posts', 'ftg-add-gallery', array($this, 'add_gallery'));
-			$tutorial = add_submenu_page('ftg-gallery-admin', __('FinalTiles Gallery >> Tutorial','FinalTiles-gallery'), __('Tutorial','FinalTiles-gallery'), 'edit_posts', 'ftg-tutorial', array($this, 'tutorial'));
-			$support = add_submenu_page('ftg-gallery-admin', __('FinalTiles Gallery >> Support','FinalTiles-gallery'), __('Support','FinalTiles-gallery'), 'edit_posts', 'ftg-support', array($this, 'support'));
+			$overview = add_menu_page('Final Tiles Gallery', 'Final Tiles Gallery', 'edit_posts', 'ftg-lite-gallery-admin', array($this, 'add_overview'), WP_PLUGIN_URL . '/final-tiles-grid-gallery-lite/admin/icon.png');			
+			$add_gallery = add_submenu_page('ftg-lite-gallery-admin', __('FinalTiles Gallery >> Add Gallery','FinalTiles-gallery'), __('Add Gallery','FinalTiles-gallery'), 'edit_posts', 'ftg-lite-add-gallery', array($this, 'add_gallery'));
+			$tutorial = add_submenu_page('ftg-lite-gallery-admin', __('FinalTiles Gallery >> Tutorial','FinalTiles-gallery'), __('Tutorial','FinalTiles-gallery'), 'edit_posts', 'ftg-lite-tutorial', array($this, 'tutorial'));
+			$support = add_submenu_page('ftg-lite-gallery-admin', __('FinalTiles Gallery >> Support','FinalTiles-gallery'), __('Support','FinalTiles-gallery'), 'edit_posts', 'ftg-lite-support', array($this, 'support'));
 
 			add_action('admin_print_styles-'.$add_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
-			add_action('admin_print_styles-'.$edit_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
+			// add_action('admin_print_styles-'.$edit_gallery, array($this, 'FinalTiles_gallery_admin_style_load'));
 
 			add_action('load-'.$tutorial, array($this, 'gallery_admin_init'));
 			add_action('load-'.$overview, array($this, 'gallery_admin_init'));
 			add_action('load-'.$add_gallery, array($this, 'gallery_admin_init'));
-			add_action('load-'.$edit_gallery, array($this, 'gallery_admin_init'));
+			// add_action('load-'.$edit_gallery, array($this, 'gallery_admin_init'));
 			add_action('load-'.$support, array($this, 'gallery_admin_init'));
 
 			add_action( 'admin_bar_menu', array($this, 'gallery_admin_bar'), 100);
@@ -636,6 +648,10 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			    $wp_field_caption = $_POST['ftg_wp_field_caption'];
 			    $style = $_POST['ftg_style'];
 			    $script = $_POST['ftg_script'];
+			    $loadedScale=intval($_POST['ftg_loadedScale']);
+			    $loadedRotate=intval($_POST['ftg_loadedRotate']);
+			    $loadedHSlide=intval($_POST['ftg_loadedHSlide']);
+			    $loadedVSlide=intval($_POST['ftg_loadedVSlide']);
 
 			    $captionEffectDuration = intval($_POST['ftg_captionEffectDuration']);
 				$id = isset($_POST['ftg_gallery_edit']) ? intval($_POST['ftg_gallery_edit']) : 0;
@@ -714,7 +730,12 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			                  'support' => $this->checkboxVal('ftg_support'),
 			                  'supportText' => $_POST['ftg_supportText'],
 			                  'envatoReferral' => $_POST['ftg_envatoReferral'],
-			                  'scrollEffect' => $scrollEffect );
+			                  'scrollEffect' => $scrollEffect, 
+			                  'loadedScale' => $loadedScale,
+			                  'loadedRotate' => $loadedRotate,
+			                  'loadedHSlide' => $loadedHSlide,
+			                  'loadedVSlide' => $loadedVSlide
+			                 );
 
 			    header("Content-type: application/json");
 			    if($id > 0)
@@ -806,7 +827,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 		var $fields = array(
 
             "General" => array(
-            	"icon" => "mdi-action-settings",
+            	"icon" => "mdi mdi-settings",
             	"fields" => array(
 	                "name" => array(
 	                    "name" => "Name",
@@ -968,7 +989,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Links & Lightbox" => array(
-            	"icon" => "mdi-content-link",
+            	"icon" => "mdi mdi-link-variant",
             	"fields" => array(
 	                "lightbox" => array(
 	                    "name" => "Lightbox &amp; Links",
@@ -1024,7 +1045,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Captions" => array(
-            	"icon" => "mdi-content-text-format",
+            	"icon" => "mdi mdi-comment-text-outline",
             	"fields" => array(	                
 	                "captionBehavior" => array(
 	            	    "name" => "Caption behavior",
@@ -1189,7 +1210,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Hover effects" => array(
-            	"icon" => "mdi-image-gradient",
+            	"icon" => "mdi mdi-file-image",
             	"fields" => array(
             		"hoverZoom" => array(
             			"name" => "Zoom",
@@ -1220,8 +1241,54 @@ if (!class_exists("FinalTiles_GalleryLite"))
                     )
             	)
             ),
+			"Image loaded effects" => array(
+				"icon" => "mdi mdi-reload",
+				"fields" => array(
+					"loadedScale" => array(
+						"name" => "Scale",
+						"description" => "",
+						"type" => "slider",
+						"min" => 0,
+						"max" => 200,
+						"mu" => "%",
+						"default"=>100,
+						"excludeFrom" => array()
+					),
+					"loadedRotate" => array(
+						"name" => "Rotate",
+						"description" => "",
+						"type" => "slider",
+						"min" => -180,
+						"max" => 180,
+						"default" => 0,
+						"mu" => "deg",
+						"excludeFrom" => array()
+					),
+					"loadedHSlide" => array(
+						"name" => "Horizontal slide",
+						"description" => "",
+						"type" => "slider",
+						"min" => -100,
+						"max" => 100,
+						"mu" => "px",
+						"default" => 0,
+						"excludeFrom" => array()
+					),
+					"loadedVSlide" => array(
+						"name" => "Vertical slide",
+						"description" => "",
+						"type" => "slider",
+						"min" => -100,
+						"max" => 100,
+						"mu" => "px",
+						"default" => 0,
+						"excludeFrom" => array() 
+					)
+
+				)
+			),
             "Style" => array(
-            	"icon" => "mdi-editor-format-paint",
+            	"icon" => "mdi mdi-format-paint",
             	"fields" => array(
 	                "borderSize" => array(
 	                    "name" => "Border size",
@@ -1284,7 +1351,7 @@ if (!class_exists("FinalTiles_GalleryLite"))
 	            )
             ),
             "Customizations" => array(
-            	"icon" => "mdi-action-extension",
+            	"icon" => "mdi mdi-puzzle",
             	"fields" => array(
                     "aClass" => array(
 	                    "name" => "Additional CSS class on A tag",

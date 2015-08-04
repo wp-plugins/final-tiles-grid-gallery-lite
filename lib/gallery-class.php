@@ -206,7 +206,7 @@ if (!class_exists("FinalTilesGallery"))
     
             $bgCaption = $this->toRGB($gallery->captionBackgroundColor);
             
-            $html = "<!-- Final Tiles Grid Gallery for WordPress v".FTGVERSION." -->\n\n";
+            $html = "<!-- Final Tiles Grid Gallery for WordPress v".FTGLITEVERSION." -->\n\n";
             $html .= stripslashes($this->gallery->beforeGalleryText);
 
             
@@ -215,12 +215,11 @@ if (!class_exists("FinalTilesGallery"))
 				
 			if($gallery->borderSize)
 				$html .= "#ftg-$this->id$rid .tile { border: " . $gallery->borderSize . "px solid " . $gallery->borderColor . "; }\n";
-        	
         	if($gallery->loadingBarColor)
-				$html .= ".final-tiles-gallery .ftg-items .loading-bar i { background:" . $gallery->loadingBarColor  . "; }\n";
+				$html .= "#ftg-$this->id$rid .ftg-items .loading-bar i { background:" . $gallery->loadingBarColor  . "; }\n";
 
 			if($gallery->loadingBarBackgroundColor)
-				$html .= ".final-tiles-gallery .ftg-items .loading-bar { background:" . $gallery->loadingBarBackgroundColor  . "; }\n";
+				$html .= "#ftg-$this->id$rid .ftg-items .loading-bar { background:" . $gallery->loadingBarBackgroundColor  . "; }\n";
         		           
             if($gallery->captionIconColor)
                 $html .= "#ftg-$this->id$rid .tile .icon { color:".$gallery->captionIconColor."; }\n";                           
@@ -264,6 +263,9 @@ if (!class_exists("FinalTilesGallery"))
             if($gallery->captionFrame == 'T' && $gallery->captionFrameColor)
             	$html .= "#ftg-$this->id$rid .tile .caption.frame .text { border-color: ". $gallery->captionFrameColor ."; }\n";
             
+			// $html .= "#ftg-$this->id$rid { transform: scale(" .$gallery->loadedScale/100 .") translate(" . $gallery->loadedHSlide . 'px,' . $gallery->loadedVSlide . "px) rotate(" . $gallery->loadedRotate .  "deg); }\n";
+			$html .= "#ftg-$this->id$rid .tile { transform: scale(" .$gallery->loadedScale/100 .") translate(" . $gallery->loadedHSlide . 'px,' . $gallery->loadedVSlide . "px) rotate(" . $gallery->loadedRotate .  "deg); }\n";
+
                 
             if($gallery->hoverZoom != 100 || $gallery->hoverRotation != 0)
             {

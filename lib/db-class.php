@@ -1,5 +1,5 @@
 <?php
-class FinalTilesDB {
+class FinalTilesLiteDB {
 	
 	private static $pInstance;
 	
@@ -8,7 +8,7 @@ class FinalTilesDB {
 	public static function getInstance() 
 	{
 		if(!self::$pInstance) {
-			self::$pInstance = new FinalTilesDB();
+			self::$pInstance = new FinalTilesLiteDB();
 		}
 		
 		return self::$pInstance;
@@ -22,8 +22,8 @@ class FinalTilesDB {
 	public function updateConfiguration()
 	{
 		global $wpdb;
-		$query = "SELECT * FROM $wpdb->FinalTilesGalleries";
-		$galleries = $wpdb->get_results($query);
+
+		$galleries = $wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->FinalTilesGalleries", ""));
 		foreach($galleries as $gallery)
 		{
 			if($gallery->configuration == NULL)
@@ -56,8 +56,8 @@ class FinalTilesDB {
 	public function deleteGallery($gid) 
 	{
 		global $wpdb;
-		$wpdb->query( "DELETE FROM $wpdb->FinalTilesImages WHERE gid = '$gid'" );
-		$wpdb->query( "DELETE FROM $wpdb->FinalTilesGalleries WHERE Id = '$gid'" );
+		$wpdb->query($wpdb->prepare("DELETE FROM $wpdb->FinalTilesImages WHERE gid = %d", $gid));
+		$wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->FinalTilesGalleries WHERE Id = %d", $gid));
 	}
 	
 	public function editGallery($gid, $data) 
@@ -76,8 +76,7 @@ class FinalTilesDB {
 	public function getGalleryById($id, $array=false) 
 	{
 		global $wpdb;
-		$query = "SELECT * FROM $wpdb->FinalTilesGalleries WHERE Id = '$id'";
-		$gallery = $wpdb->get_row($query);
+		$gallery = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->FinalTilesGalleries WHERE Id = %d", $id));
 
 		if($array)
 		{
@@ -88,6 +87,37 @@ class FinalTilesDB {
 		
 		
 		// compatibility checks
+		
+		
+		if(empty($data->enableTwitter))
+			$data->enableTwitter = 'F';
+		if(empty($data->enableFacebook))
+			$data->enableFacebook = 'F';
+		if(empty($data->enableGplus))
+			$data->enableGplus = 'F';
+		if(empty($data->enablePinterest))
+			$data->enablePinterest = 'F';
+		if(empty($data->captionFrame))
+			$data->captionFrame = "F";
+		if(empty($data->hoverIconRotation))
+			$data->hoverIconRotation = "F";
+		if(empty($data->blank))
+			$data->blank = "F";
+		if(empty($data->aClass))
+			$data->aClass = "";
+		if(empty($data->rel))
+			$data->rel = "";
+		if(empty($data->style))
+			$data->style = "";
+		if(empty($data->script))
+			$data->script = "";
+		if(empty($data->loadingBarColor))
+			$data->loadingBarColor = "#fff";
+		if(empty($data->loadingBarBackgroundColor))
+			$data->loadingBarBackgroundColor = "#fff";
+		if(empty($data->backgroundColor))
+			$data->backgroundColor = "#fff";
+		
 		if(empty($data->wp_field_caption))
 			$data->wp_field_caption = "description";
 		if(empty($data->captionBehavior))
@@ -113,18 +143,19 @@ class FinalTilesDB {
 		if(empty($data->delay))
 			$data->delay = 0;
 
+
 		if(empty($data->captionFullHeight))
 			$data->captionFullHeight = "T";
 		if(empty($data->captionEmpty))
 			$data->captionEmpty = "hide";
 		if(empty($data->captionEffect))
-			$data->captionEffect = $gallery->hoverEffect;
+		//	$data->captionEffect = $gallery->hoverEffect;
 		if(empty($data->captionBackgroundColor))
 			$data->captionBackgroundColor = $gallery->hoverColor;
 		if(empty($data->captionOpacity))
-			$data->captionOpacity = $gallery->hoverOpacity;
+			$data->captionOpacity = 80;
 		if(empty($data->captionEasing))
-			$data->captionEasing = $gallery->hoverEasing;
+			//$data->captionEasing = $gallery->hoverEasing;
 		if(empty($data->captionFrame))
 			$data->captionFrame = "F";
 		if(empty($data->captionFrameColor))
@@ -175,7 +206,7 @@ class FinalTilesDB {
 	{
 		global $wpdb;
 		$query = "SELECT Id, configuration FROM $wpdb->FinalTilesGalleries order by id";
-		$galleryResults = $wpdb->get_results( $query );
+		$galleryResults = $wpdb->get_results($query);
 		
 		$result = array();
 		foreach($galleryResults as $gallery)
@@ -210,8 +241,8 @@ class FinalTilesDB {
 
 		foreach ($images as $image) {
 			$data = array( 'gid' => $gid, 'imagePath' => $image->imagePath, 
-     					 'description' => $image->description, 
-					'imageId' => $image->imageId, 'sortOrder' => 0, 'filters' => $images->filters );
+     					 'description' => isset($image->description) ? $image->description : "", 
+					'imageId' => $image->imageId, 'sortOrder' => 0 );
 			$data['type'] = isset($image->type) ? $image->type : 'image';
 			
 				
@@ -231,8 +262,7 @@ class FinalTilesDB {
 	
 	public function deleteImage($id) {
 		global $wpdb;
-		$query = "DELETE FROM $wpdb->FinalTilesImages WHERE Id = '$id'";
-		if($wpdb->query($query) === FALSE) {
+		if($wpdb->query($wpdb->prepare("DELETE FROM $wpdb->FinalTilesImages WHERE Id = %d", $id)) === FALSE) {
 			return false;
 		}
 		else {
@@ -262,8 +292,7 @@ class FinalTilesDB {
 	public function getImagesByGalleryId($gid) 
 	{
 		global $wpdb;
-		$query = "SELECT * FROM $wpdb->FinalTilesImages WHERE gid = $gid ORDER BY sortOrder ASC";
-		$imageResults = $wpdb->get_results( $query );
+		$imageResults = $wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->FinalTilesImages WHERE gid = %d ORDER BY sortOrder ASC", $gid) );
 
 		foreach($imageResults as &$image)
 			$image->source = "gallery";
@@ -273,8 +302,7 @@ class FinalTilesDB {
 	
 	public function getGalleryByGalleryId($gid) {
 		global $wpdb;
-		$query = "SELECT $wpdb->FinalTilesGalleries.*, $wpdb->FinalTilesImages.* FROM $wpdb->FinalTilesGalleries INNER JOIN $wpdb->FinalTilesImages ON ($wpdb->FinalTilesGalleries.Id = $wpdb->FinalTilesImages.gid) WHERE $wpdb->FinalTilesGalleries.Id = '$gid' ORDER BY sortOrder ASC";			
-		$gallery = $wpdb->get_results( $query );		
+		$gallery = $wpdb->get_results( $wpdb->prepare("SELECT $wpdb->FinalTilesGalleries.*, $wpdb->FinalTilesImages.* FROM $wpdb->FinalTilesGalleries INNER JOIN $wpdb->FinalTilesImages ON ($wpdb->FinalTilesGalleries.Id = $wpdb->FinalTilesImages.gid) WHERE $wpdb->FinalTilesGalleries.Id = %d ORDER BY sortOrder ASC", $gid) );		
 		return $gallery;
 	}
 }

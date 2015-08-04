@@ -21,7 +21,7 @@
 }
 #top {
   padding: 1rem 0 3rem 40px;
-  background-image: url('../images/colors.jpg');
+  /*background-image: url('../images/colors.jpg');*/
   background-repeat: repeat-x;
   background-position: left bottom;
   font-family: Roboto, 'sans-serif';
