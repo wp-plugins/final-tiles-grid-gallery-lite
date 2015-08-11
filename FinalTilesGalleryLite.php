@@ -49,7 +49,14 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			add_action('wp_ajax_delete_image', array($this,'delete_image'));
 			add_action('wp_ajax_refresh_gallery', array($this,'refresh_gallery'));
 
+
+			add_filter('mce_buttons', array($this, 'editor_button'));
+			add_filter('mce_external_plugins', array($this, 'register_editor_plugin'));
+			add_action('wp_ajax_ftg_shortcode_editor', array($this, 'ftg_shortcode_editor'));
+
 			add_filter( 'plugin_row_meta',array( $this, 'register_links' ),10,2);
+
+
 
             $this->resetFields();
 		}
@@ -153,6 +160,29 @@ if (!class_exists("FinalTiles_GalleryLite"))
 			return $FinalTilesdb;
 		}
 
+		public function editor_button($buttons)
+		{
+			array_push($buttons, 'separator', 'ftg_shortcode_editor');
+			return $buttons;
+		}
+	
+		public function register_editor_plugin($plugin_array)
+		{
+			$plugin_array['ftg_shortcode_editor'] = plugins_url('/admin/scripts/editor-plugin.js',__file__);
+			return $plugin_array;
+		}
+	
+		public function ftg_shortcode_editor()
+		{
+			$css_path = plugins_url( 'assets/css/admin.css', __FILE__ );
+			$admin_url = admin_url();
+			
+			$galleries = $this->FinalTilesdb->getGalleries(); //load all galleries
+
+			include 'admin/include/tinymce-galleries.php';
+			die();
+		}
+		
         public function attachment_fields_to_edit($form, $post)
 		{
 			$form["ftg_link"] = array(
