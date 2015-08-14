@@ -103,6 +103,9 @@ The PRO license bundles 6 different lightboxes. However you can use any other li
 
 == Changelog ==
 
+= 2.0.6 =
+* Add gallery shortcode from text editor
+
 = 2.0.5 =
 * New features: sequential image loading, admin image size list, customize loading bar color and loading bar background color
 
