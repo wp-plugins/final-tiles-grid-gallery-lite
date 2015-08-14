@@ -103,6 +103,9 @@ The PRO license bundles 6 different lightboxes. However you can use any other li
 
 == Changelog ==
 
+= 2.0.7 =
+* New features: Add gallery shortcode from text editor
+
 = 2.0.6 =
 * New features: Image loaded effects
 
